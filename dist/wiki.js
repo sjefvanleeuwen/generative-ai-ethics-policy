@@ -363,14 +363,85 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log(`Initializing viewer for ${bpmnFile}`);
             
-            // Create viewer instance
-            const viewer = new BpmnJS({ container: `#${viewerId}` });
+            // Create viewer instance with navigation options enabled
+            const viewer = new BpmnJS({
+                container: `#${viewerId}`,
+                keyboard: {
+                    bindTo: document
+                },
+                // Enable panning and zooming features
+                canvas: {
+                    deferUpdate: false
+                }
+            });
+
+            // Add mouse navigation for panning
+            const canvas = viewer.get('canvas');
+            const eventBus = viewer.get('eventBus');
+
+            // Mouse behavior state
+            let mouseDown = false;
+            let lastX, lastY;
+
+            // Add event listeners for mouse panning
+            canvasElement.addEventListener('mousedown', function(event) {
+                // Only enable panning with middle mouse button or when holding Ctrl
+                if (event.button === 1 || event.ctrlKey) {
+                    mouseDown = true;
+                    lastX = event.clientX;
+                    lastY = event.clientY;
+                    
+                    // Add a custom CSS class to change cursor
+                    canvasElement.classList.add('panning');
+                    
+                    // Prevent text selection during panning
+                    event.preventDefault();
+                }
+            });
+            
+            canvasElement.addEventListener('mousemove', function(event) {
+                if (mouseDown) {
+                    const dx = event.clientX - lastX;
+                    const dy = event.clientY - lastY;
+                    
+                    // Get current viewport
+                    const viewbox = canvas.viewbox();
+                    
+                    // Pan the viewport
+                    viewbox.x -= dx / viewbox.scale;
+                    viewbox.y -= dy / viewbox.scale;
+                    
+                    // Apply updated viewport
+                    canvas.viewbox(viewbox);
+                    
+                    lastX = event.clientX;
+                    lastY = event.clientY;
+                    
+                    // Prevent default browser behavior
+                    event.preventDefault();
+                }
+            });
+
+            // Handle mouse up and mouse leave events
+            function endPan() {
+                mouseDown = false;
+                canvasElement.classList.remove('panning');
+            }
+            
+            canvasElement.addEventListener('mouseup', endPan);
+            canvasElement.addEventListener('mouseleave', endPan);
             
             // Store viewer instance for later use
             window[viewerId] = viewer;
             
-            // Load the BPMN XML
-            fetch(`bpmn/${bpmnFile}`)
+            // Construct correct path to BPMN file
+            // Ensure we're using the correct path from ./bpmn folder
+            const bpmnFilePath = `./bpmn/${bpmnFile}`;
+            
+            // Load the BPMN XML - log the exact URL for debugging
+            console.log(`Loading BPMN from: ${bpmnFilePath}`);
+            
+            fetch(bpmnFilePath)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`Failed to load BPMN file: ${response.status} ${response.statusText}`);
@@ -384,6 +455,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             console.log(`Rendered diagram for ${bpmnFile}`);
                             // Fit the diagram to the viewport
                             viewer.get('canvas').zoom('fit-viewport');
+                            // Mark as loaded to hide loading message
+                            canvasElement.classList.add('loaded');
                         })
                         .catch(err => {
                             console.error('Error rendering BPMN diagram:', err);
@@ -392,7 +465,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .catch(err => {
                     console.error('Error loading BPMN file:', err);
-                    canvasElement.innerHTML = `<div class="alert alert-danger">Error loading diagram file: ${err.message}</div>`;
+                    // Add detailed error info including the attempted URL
+                    canvasElement.innerHTML = `
+                        <div class="alert alert-danger">
+                            <p>Error loading diagram file: ${err.message}</p>
+                            <p>Attempted URL: ${bpmnFilePath}</p>
+                            <p>Make sure the BPMN file exists in the correct location.</p>
+                        </div>
+                    `;
                 });
         });
         
@@ -563,8 +643,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <div id="bpmn-viewer" class="bpmn-viewer">
                 <div class="bpmn-placeholder">
                     <p>BPMN Diagram: ${title}</p>
-                    <p>The diagram is available as XML in the BPMN XML Source section below.</p>
-                    <p>Run <code>npm run convert-bpmn</code> to generate SVG visualizations.</p>
+                    <p>Currently loading BPMN file from: ${bpmnFile}</p>
+                    <p>If the diagram doesn't appear after a few seconds, check browser console for errors.</p>
                 </div>
             </div>
         </div>
@@ -588,7 +668,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const bpmnXmlLink = document.createElement('div');
         bpmnXmlLink.className = 'bpmn-download-links';
         bpmnXmlLink.innerHTML = `
-            <a href="bpmn/${bpmnFile}" download class="btn btn-sm btn-outline-secondary" target="_blank">Download BPMN XML</a>
+            <a href="${bpmnFile}" download class="btn btn-sm btn-outline-secondary" target="_blank">Download BPMN XML</a>
         `;
         contentElement.appendChild(bpmnXmlLink);
     }

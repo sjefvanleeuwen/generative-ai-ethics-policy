@@ -41,11 +41,10 @@ const bpmnFiles = fs.readdirSync(sourceDir)
   .filter(file => file.endsWith('.bpmn'))
   .map(file => path.basename(file));
 
-// Embed BPMN reference in the target markdown file
+// Embed BPMN viewer container in the target markdown file
 function embedBpmnInMarkdown(bpmnFileName) {
   const { title, targetFile } = bpmnToMarkdownMap[bpmnFileName];
   const markdownPath = path.join(__dirname, targetFile);
-  const svgFileName = bpmnFileName.replace('.bpmn', '.svg');
   
   if (!fs.existsSync(markdownPath)) {
     console.log(`  ✗ Target markdown file not found: ${targetFile}`);
@@ -58,15 +57,28 @@ function embedBpmnInMarkdown(bpmnFileName) {
     // Read the markdown file
     let markdown = fs.readFileSync(markdownPath, 'utf8');
     
-    // Create the diagram section to append - use bpmn file reference and svg for static preview
-    const diagramSection = `\n## ${title} Diagram\n\n![${title}](bpmn/svg/${svgFileName})\n\n[View larger diagram or download BPMN XML](bpmn/${bpmnFileName})\n\n`;
+    // Create the viewer container for this BPMN file
+    const viewerId = `bpmn-viewer-${bpmnFileName.replace(/\./g, '-')}`;
+    const diagramSection = `\n## ${title} Diagram\n\n<div class="bpmn-viewer-container" id="${viewerId}-container">
+  <div class="bpmn-toolbar">
+    <span>${title}</span>
+    <div>
+      <button class="zoom-in" data-viewer="${viewerId}">Zoom In</button>
+      <button class="zoom-out" data-viewer="${viewerId}">Zoom Out</button>
+      <button class="reset-view" data-viewer="${viewerId}">Reset View</button>
+    </div>
+  </div>
+  <div class="bpmn-canvas" id="${viewerId}" data-bpmn-file="${bpmnFileName}"></div>
+</div>
+
+[View/download BPMN XML](bpmn/${bpmnFileName})\n\n`;
     
     // Check if the diagram section already exists
     if (markdown.includes(`## ${title} Diagram`)) {
       // Replace the existing diagram section
-      const pattern = new RegExp(`\n## ${title} Diagram\n\n.*?\n\n\\[View larger diagram.*?\n\n`, 'g');
+      const pattern = new RegExp(`\n## ${title} Diagram\n\n.*?\n\n\\[View.*?\n\n`, 'gs');
       markdown = markdown.replace(pattern, diagramSection);
-      console.log(`  ✓ Replaced existing diagram reference in ${targetFile}`);
+      console.log(`  ✓ Replaced existing diagram viewer in ${targetFile}`);
     } else {
       // Find the position to insert the diagram (before the navigation section at the end)
       const navigationPattern = /\n---\n\n\[\←.*?\]\(.*?\) \| \[.*?\]\(.*?\)/;
@@ -80,7 +92,7 @@ function embedBpmnInMarkdown(bpmnFileName) {
         // If no navigation section, append to the end
         markdown += diagramSection;
       }
-      console.log(`  ✓ Added diagram reference to ${targetFile}`);
+      console.log(`  ✓ Added diagram viewer to ${targetFile}`);
     }
     
     // Write the updated markdown
@@ -107,7 +119,6 @@ This section contains BPMN 2.0 process diagrams that illustrate the key processe
     for (const bpmnFileName of bpmnFiles) {
       if (bpmnToMarkdownMap[bpmnFileName]) {
         const { title, description } = bpmnToMarkdownMap[bpmnFileName];
-        const svgFileName = bpmnFileName.replace('.bpmn', '.svg');
         const viewerId = `bpmn-viewer-${bpmnFileName.replace(/\./g, '-')}`;
         
         newContent += `### ${title}\n\n${description}\n\n`;
@@ -149,9 +160,9 @@ For technical integration of these processes into your systems, the XML source o
 
 // Main function
 function main() {
-  console.log("Adding BPMN diagram references to markdown files...");
+  console.log("Adding BPMN diagram viewers to markdown files...");
   
-  // Update each markdown file with a reference to the corresponding BPMN diagram
+  // Update each markdown file with an interactive BPMN viewer
   for (const bpmnFileName of bpmnFiles) {
     if (bpmnToMarkdownMap[bpmnFileName]) {
       embedBpmnInMarkdown(bpmnFileName);
@@ -161,7 +172,7 @@ function main() {
   // Update the process-diagrams.md file
   updateProcessDiagramsFile();
   
-  console.log("BPMN diagram references added successfully!");
+  console.log("BPMN diagram viewers added successfully!");
 }
 
 // Execute the main function

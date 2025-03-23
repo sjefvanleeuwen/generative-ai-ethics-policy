@@ -2,101 +2,60 @@
 
 **Objective**
 
-Identify, assess, prioritize, mitigate, and monitor all risks arising from generative AI systems to ensure they operate safely, ethically, and in compliance with legal and organizational requirements.
+Systematically identify, assess, mitigate, and monitor risks associated with generative AI systems to ensure they are developed and deployed responsibly.
 
 **Scope**
 
-Covers all generative AI projects and systems at every stage of the lifecycle�including ideation, design, procurement, deployment, maintenance, and decommissioning�for all business units.
+All potential risks across the entire AI system lifecycle, including technical, ethical, legal, reputational, and societal risks.
 
-**Risk Taxonomy**
-
-All AI-related risks are categorized into five domains:
-
-|     |     |     |
-| 
-
-
------- | --- | --- |
-| Category | Description | Examples |
-| Bias & Fairness | Potential discriminatory or unequal outcomes | Algorithmic bias in hiring decisions, unequal customer support responses |
-| Privacy & Data Protection | Risks to personal data confidentiality, integrity, availability | Unlawful data processing, re-identification of anonymized data |
-| Security & Robustness | Vulnerabilities to malicious attacks or failures | Model poisoning, adversarial inputs, data breaches |
-| Environmental | Negative environmental impacts from AI compute | High energy consumption, carbon emissions from model training |
-| Intellectual Property | Legal risks around ownership, licensing, infringement | Use of copyrighted training data, unclear output ownership |
-
-**Risk Assessment Process**
-
-1.  **Risk Identification:** Business Unit Leads document potential risks using the AI Risk Register template (Annex F).
-2.  **Risk Analysis:** Quantify each risk�s likelihood and impact using a standardized scoring matrix (Annex G).
-3.  **Risk Prioritization:** Classify risks as Low, Medium, High, or Critical based on combined scores.
-4.  **Risk Mitigation Planning:** Develop mitigation plans for Medium+ risks, including technical controls, process changes, or stakeholder communication.
-5.  **Risk Approval:** Submit mitigation plan for review and approval by Technical Review Committee and AI Ethics Board for High/Critical risks.
-6.  **Risk Tracking:** Log all risks and mitigation actions in the Compliance Register; update status monthly.
-
-**Risk Mitigation Strategies**
+**Key Requirements**
 
 |     |     |     |     |
 | --- | --- | --- | --- |
-| Risk Category | Mitigation Controls | Owner | Timeline |
-| Bias & Fairness | Bias audits, diverse training datasets, fairness testing | IT Engineering, HR | Quarterly |
-| Privacy | Data minimization, encryption, anonymization | DPO, IT Security | Ongoing |
-| Security | Adversarial testing, access controls, incident response drills | IT Security | Quarterly |
-| Environmental | Model efficiency benchmarks, carbon offset programs | Sustainability Office | Annual |
-| IP  | License verification, provenance documentation | Procurement, Legal | Per project |
+| Requirement | Description | Owner | Timeline |
+| Risk Assessment | Formal process to identify and classify AI risks | Business Unit Lead | Project initiation |
+| Risk Register | Central repository of identified risks and mitigation actions | IT Security | Maintain continuously |
+| Mitigation Planning | Documented plan for handling medium/high/critical risks | Business Unit Lead | Post-assessment |
+| Risk Reviews | Regular reassessment of risk ratings and effectiveness of controls | Technical Review Committee | Quarterly |
 
-**Monitoring & Reporting**
+**Procedures**
 
-*   Maintain a live AI Risk Dashboard tracking all active risks, mitigation status, and residual risk levels.
-*   Conduct quarterly risk review meetings chaired by the AI Ethics Board.
-*   Produce a semi-annual Risk Management Report summarizing new, mitigated, and escalated risks.
+1.  Complete AI Risk Assessment Form (Annex F).
+2.  Quantify risks using the Risk Scoring Matrix (Annex G).
+3.  Add to Risk Register with proposed mitigations.
+4.  Implement and verify mitigations before production.
 
-**Documentation Requirements**
-
-|     |     |     |     |
-| --- | --- | --- | --- |
-| Document | Description | Retention Period | Owner |
-| AI Risk Register | Detailed log of identified risks and mitigation plans | Until risk closure + 3 years | Business Unit Leads |
-| Risk Assessment Report | Formal analysis of Medium+ risks | 5 years | DPO |
-| Mitigation Action Log | Status of all mitigation tasks | Until risk closure + 3 years | IT Security |
-| Risk Review Minutes | Records of quarterly review meetings | 5 years | AI Ethics Board Secretary |
-
-**Roles & Responsibilities**
-
-|     |     |
-| --- | --- |
-| Role | Responsibility |
-| Business Unit Leads | Identify, document, and track risks for their AI use cases |
-| Technical Review Committee | Validate risk assessments and approve mitigation plans |
-| IT Security | Implement security controls and conduct adversarial tests |
-| HR  | Lead bias and fairness assessments for HR systems |
-| Sustainability Office | Measure and report environmental impacts; propose efficiency improvements |
-| Procurement | Ensure third-party vendors provide risk documentation |
-| AI Ethics Board | Oversee risk governance, approve critical risk mitigations, and escalate as needed |
-| DPO | Review privacy risks, approve risk assessments, ensure GDPR compliance |
-
-**Metrics & Targets**
+**Controls & Metrics**
 
 |     |     |     |     |
 | --- | --- | --- | --- |
 | Metric | Target | Frequency | Owner |
-| % of AI projects with completed Risk Assessments | 100% | Quarterly | DPO |
-| % of High/Critical risks with mitigation plans | 100% | Monthly | AI Ethics Board |
-| Average time to close mitigation actions | ≤ 90 days | Quarterly | IT Security |
-| Residual Risk Score Reduction | ≥ 20% reduction year-over-year | Annual | AI Ethics Board |
+| Risk Assessment Completion | 100% of AI initiatives | At initiation | Business Unit Lead |
+| High/Critical Risk Mitigation | 100% addressed before deployment | Before go-live | Business Unit Lead |
+| Reassessment Compliance | Quarterly reviews of all high/critical risks | Quarterly | Technical Review Committee |
 
 **Review Cycle**
 
-*   Risk Management framework reviewed annually and updated to reflect emerging threats, regulatory changes, and audit findings.
+*   Risk assessment process: Annually
+*   Risk register: Quarterly
+
+## AI Risk Assessment Process Diagram
+
+<div class="bpmn-viewer-container" id="bpmn-viewer-ai-risk-assessment-process-bpmn-container">
+  <div class="bpmn-toolbar">
+    <span>AI Risk Assessment Process</span>
+    <div>
+      <button class="zoom-in" data-viewer="bpmn-viewer-ai-risk-assessment-process-bpmn">Zoom In</button>
+      <button class="zoom-out" data-viewer="bpmn-viewer-ai-risk-assessment-process-bpmn">Zoom Out</button>
+      <button class="reset-view" data-viewer="bpmn-viewer-ai-risk-assessment-process-bpmn">Reset View</button>
+    </div>
+  </div>
+  <div class="bpmn-canvas" id="bpmn-viewer-ai-risk-assessment-process-bpmn" data-bpmn-file="ai-risk-assessment-process.bpmn"></div>
+</div>
+
+[View/download BPMN XML](bpmn/ai-risk-assessment-process.bpmn)
 
 ---
 
 [← Governance & Accountability](05-Governance-and-Accountability.md) | [Table of Contents](00-Table-of-Contents.md) | [Transparency & Explainability →](07-Transparency-and-Explainability.md)
-
-
-
-## AI Risk Assessment Process Diagram
-
-![AI Risk Assessment Process](bpmn/svg/ai-risk-assessment-process.svg)
-
-[View larger diagram or download BPMN XML](bpmn/ai-risk-assessment-process.bpmn)
 

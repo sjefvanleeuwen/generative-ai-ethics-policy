@@ -516,6 +516,26 @@ th, td {
 .bpmn-canvas {
   height: calc(100% - 40px);
   width: 100%;
+  cursor: default;
+}
+
+/* Cursor styles for panning */
+.bpmn-canvas.panning {
+  cursor: move;
+  cursor: grabbing;
+}
+
+/* Add panning instructions */
+.bpmn-toolbar span {
+  display: flex;
+  align-items: center;
+}
+
+.bpmn-toolbar span::after {
+  content: " (Hold Ctrl+Click to pan)";
+  font-size: 11px;
+  color: #666;
+  margin-left: 8px;
 }
 
 /* Make sure BPMN labels are visible */

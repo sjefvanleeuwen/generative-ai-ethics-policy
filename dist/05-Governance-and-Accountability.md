@@ -2,81 +2,60 @@
 
 **Objective**
 
-Establish a clear, formal governance framework that defines decision rights, accountability, resource commitments, and escalation procedures for all generative AI initiatives. This ensures consistent oversight, rapid issue resolution, and alignment with corporate strategy and regulatory requirements.
+Establish clear responsibility, oversight, and decision-making processes for generative AI development and use to ensure ethical, fair, and safe applications.
 
 **Scope**
 
-Applies to all stages of the AI lifecycle � strategy, design, procurement, development, deployment, monitoring, and retirement � across all business units and functions.
+All generative AI systems, from conception through to decommissioning.
 
-**Governance Structure**
+**Key Requirements**
 
 |     |     |     |     |
-| 
+| --- | --- | --- | --- |
+| Requirement | Description | Owner | Timeline |
+| AI Ethics Board | Cross-functional board to review high-risk use cases | Board Chair | Quarterly meetings |
+| Technical Review Committee | Expert committee for AI-specific reviews | CTO | Monthly reviews |
+| Role Assignment Matrix | Documentation of all AI roles and responsibilities | HR  | Maintain continuously |
+| Decision Documentation | Record keeping of key decisions and rationale | All stakeholders | Per decision |
 
+**Procedures**
 
------- | --- | --- | --- |
-| Body / Role | Composition | Responsibilities | Meeting Cadence |
-| AI Ethics Board | Executive sponsor, Chief Data Officer (Chair), DPO, Legal Head, HR Head, IT Security Lead, Sustainability Lead | Approve AI policy, authorize high-risk AI use cases, adjudicate escalations, review annual compliance report | Quarterly + ad hoc for escalations |
-| Technical Review Committee | Senior data scientists, BI leads, IT engineering representatives | Validate technical risk assessments, approve model selection & deployment, oversee bias audits | Monthly |
-| HR Oversight Committee | HR leadership, Employee Representatives, DPO | Review AI-driven HR use cases, ensure fairness, approve evaluation criteria | Quarterly |
-| Sustainability Advisory Group | Sustainability Office, Procurement, IT | Review environmental assessments, recommend efficiency improvements | Semi-annual |
+1.  Complete AI Project Initiation Form (Annex C) for all new generative AI initiatives.
+2.  Conduct mandatory review by Technical Review Committee for training, deployment, and update cycles.
+3.  Present high-risk use cases to AI Ethics Board for approval before development.
+4.  Maintain Decision Log (Annex D) for key decisions.
 
-**Roles & Responsibilities**
+**Controls & Metrics**
 
-|     |     |
-| --- | --- |
-| Role | Responsibility |
-| AI Ethics Board | Accountable for policy enforcement, risk acceptance decisions, resource approval |
-| Data Protection Officer | Responsible for DPIAs, compliance register, regulatory liaison |
-| Legal | Consulted on policy exceptions, contract reviews, compliance advice |
-| IT Security | Responsible for technical controls, adversarial testing, incident response |
-| HR  | Responsible for employee notifications, appeals management, fairness reviews |
-| Procurement | Responsible for vendor due diligence, contract compliance |
-| Sustainability Office | Responsible for environmental impact measurement, reporting |
-| Business Unit Leads | Responsible for identifying AI use cases, conducting risk assessments, executing controls |
+|     |     |     |     |
+| --- | --- | --- | --- |
+| Metric | Target | Frequency | Owner |
+| Ethics Board Reviews | 100% of high-risk use cases | Quarterly | Board Chair |
+| Technical Reviews | 100% of AI systems | Quarterly | CTO |
+| Decision Log Accuracy | 100% of decisions documented | Monthly audit | IT Governance |
 
-**Decision Rights & Escalation Pathways**
+**Review Cycle**
 
-|     |     |     |     |     |
-| --- | --- | --- | --- | --- |
-| Decision | Responsible | Accountable | Consulted | Escalate To (if unresolved) |
-| Approve new AI use case | Business Unit Lead | AI Ethics Board | DPO, IT Security, Legal | Executive Sponsor |
-| Classify AI risk tier | Business Unit Lead | DPO | Technical Review Committee | AI Ethics Board |
-| Approve DPIA completion | DPO | AI Ethics Board | Business Unit Lead | Legal |
-| Exception request | Business Unit Lead | Legal | AI Ethics Board, DPO | CEO |
-| Incident remediation plan | IT Security | AI Ethics Board | DPO, Business Unit Lead | Executive Sponsor |
+*   Governance structure: Annually
+*   Decision procedures: Semi-annually
 
-**Resource Allocation**
+## AI Development Lifecycle Diagram
 
-*   Annual budget approval for AI governance activities (audits, training, tooling) through Finance and AI Ethics Board.
-*   Defined headcount allocation (FTEs) for governance roles documented in Annex D.
+<div class="bpmn-viewer-container" id="bpmn-viewer-ai-development-lifecycle-bpmn-container">
+  <div class="bpmn-toolbar">
+    <span>AI Development Lifecycle</span>
+    <div>
+      <button class="zoom-in" data-viewer="bpmn-viewer-ai-development-lifecycle-bpmn">Zoom In</button>
+      <button class="zoom-out" data-viewer="bpmn-viewer-ai-development-lifecycle-bpmn">Zoom Out</button>
+      <button class="reset-view" data-viewer="bpmn-viewer-ai-development-lifecycle-bpmn">Reset View</button>
+    </div>
+  </div>
+  <div class="bpmn-canvas" id="bpmn-viewer-ai-development-lifecycle-bpmn" data-bpmn-file="ai-development-lifecycle.bpmn"></div>
+</div>
 
-**Policy Exceptions Process**
-
-1.  Submit Exception Request Form (Annex E) detailing rationale, risk mitigation, and duration.
-2.  Review by Legal and DPO within 5 business days.
-3.  Final approval by AI Ethics Board; record decision in Compliance Register.
-
-**Communication & Reporting**
-
-*   Publish Governance Framework and key decisions on internal policy portal.
-*   Quarterly governance dashboard to senior leadership, including risk heatmap and compliance status.
-*   Annual public AI ethics report summarizing governance outcomes, approved use cases, and stakeholder feedback.
-
-**Integration with Corporate Governance**
-
-*   Align AI governance with Enterprise Risk Management, Information Security, and Sustainability policies.
-*   Embed AI risk metrics into corporate scorecards and board-level reporting.
+[View/download BPMN XML](bpmn/ai-development-lifecycle.bpmn)
 
 ---
 
 [← Regulatory Compliance](04-Regulatory-Compliance.md) | [Table of Contents](00-Table-of-Contents.md) | [Risk Management →](06-Risk-Management.md)
-
-
-
-## AI Development Lifecycle Diagram
-
-![AI Development Lifecycle](bpmn/svg/ai-development-lifecycle.svg)
-
-[View larger diagram or download BPMN XML](bpmn/ai-development-lifecycle.bpmn)
 
