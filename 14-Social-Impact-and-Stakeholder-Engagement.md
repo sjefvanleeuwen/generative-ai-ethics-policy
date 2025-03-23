@@ -13,7 +13,8 @@ Covers communication and consultation with employees, customers, regulators, com
 |     |     |     |     |
 | --- | --- | --- | --- |
 | Requirement | Description | Owner | Timeline |
-| Stakeholder Mapping | Identify and categorize stakeholder groups based on impact and influ ence | Business Strategy | Annually |
+|-------------|-------------|-------|----------|
+| Stakeholder Mapping | Identify and categorize stakeholder groups based on impact and influence | Business Strategy | Annually |
 | Public Disclosure | Publish summary of high-risk AI use cases, risk mitigations, and audit results | AI Ethics Board | Quarterly |
 | Feedback Mechanisms | Establish channels (surveys, forums, webinars) for stakeholder input | Communications | Ongoing |
 | Regulatory Liaison | Proactively engage regulators on AI governance and compliance matters | DPO | Ongoing |

@@ -17,7 +17,8 @@ const filesToCopy = [
     '*.md'
 ];
 const directoriesToCopy = [
-    'bpmn'
+    'bpmn',
+    'images' // Added images directory to be copied
 ];
 
 // Ensure dist directory exists
@@ -59,7 +60,7 @@ function copyFiles(patterns) {
     });
 }
 
-// Copy directories
+// Copy directories recursively without relying on fs-extra
 function copyDirectories(directories) {
     directories.forEach(dir => {
         console.log(`Copying ${dir} directory...`);
@@ -77,39 +78,31 @@ function copyDirectories(directories) {
             fs.mkdirSync(destPath, { recursive: true });
         }
         
-        // Copy all files in the directory
-        fs.readdirSync(sourcePath).forEach(file => {
-            const srcFilePath = path.join(sourcePath, file);
-            const destFilePath = path.join(destPath, file);
-            
-            // Handle subdirectories (for svg folder inside bpmn)
-            if (fs.statSync(srcFilePath).isDirectory()) {
-                console.log(`  Processing subdirectory: ${file}`);
-                
-                // Create the subdirectory in the destination
-                if (!fs.existsSync(destFilePath)) {
-                    fs.mkdirSync(destFilePath, { recursive: true });
-                }
-                
-                // Copy all files in the subdirectory
-                fs.readdirSync(srcFilePath).forEach(subFile => {
-                    const srcSubFilePath = path.join(srcFilePath, subFile);
-                    const destSubFilePath = path.join(destFilePath, subFile);
-                    
-                    // Only copy files, not nested directories
-                    if (!fs.statSync(srcSubFilePath).isDirectory()) {
-                        fs.copyFileSync(srcSubFilePath, destSubFilePath);
-                        console.log(`    Copied: ${file}/${subFile}`);
-                    }
-                });
-                
-                return;
+        // Copy directory recursively using a custom function
+        copyDirRecursive(sourcePath, destPath);
+    });
+}
+
+// Recursive directory copy function without fs-extra
+function copyDirRecursive(src, dest) {
+    const entries = fs.readdirSync(src, { withFileTypes: true });
+    
+    entries.forEach(entry => {
+        const srcPath = path.join(src, entry.name);
+        const destPath = path.join(dest, entry.name);
+        
+        if (entry.isDirectory()) {
+            // Create subdirectory if it doesn't exist
+            if (!fs.existsSync(destPath)) {
+                fs.mkdirSync(destPath, { recursive: true });
             }
-            
-            // Copy the file
-            fs.copyFileSync(srcFilePath, destFilePath);
-            console.log(`  Copied: ${file}`);
-        });
+            // Recursively copy contents
+            copyDirRecursive(srcPath, destPath);
+        } else {
+            // Copy file
+            fs.copyFileSync(srcPath, destPath);
+            console.log(`  Copied: ${path.relative(sourceDir, srcPath)}`);
+        }
     });
 }
 
@@ -158,7 +151,7 @@ function build() {
     copyFiles(filesToCopy);
     copyDirectories(directoriesToCopy);
     
-    console.log('Build complete!');
+    console.log('Build complete! Files and directories copied to dist folder.');
 }
 
 // Command line arguments handling

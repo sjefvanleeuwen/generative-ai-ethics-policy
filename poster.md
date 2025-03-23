@@ -1,5 +1,7 @@
 # 🧠 AI Use Policy – What You Need to Know (At a Glance)
 
+![ai ethics impression](./images/ai-ethics-impression.png)
+
 ## 📌 What This Is
 This is your quick guide to how we use Generative AI ethically, safely, and legally across the company.
 
@@ -38,10 +40,10 @@ This is your quick guide to how we use Generative AI ethically, safely, and lega
 ---
 
 ## 🧭 Where to Go for Help
-- 📩 **DPO** – Data privacy or consent questions  
-- 🛡️ **IT Security** – Safe AI use & logging  
-- 👥 **HR** – If AI affects employment or evaluations  
-- 🧪 **AI Ethics Board** – Policy, approvals, or appeals
+- 📩 **DPO** &ndash; Data privacy or consent questions  
+- 🛡️ **IT Security** &ndash; Safe AI use & logging  
+- 👥 **HR** &ndash; If AI affects employment or evaluations  
+- 🧪 **AI Ethics Board** &ndash; Policy, approvals, or appeals
 
 ---
 

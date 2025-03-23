@@ -2,7 +2,7 @@
 
 **Objective**
 
-Ensure that generative AI systems and their outputs are designed, developed, and deployed to be accessible to all users � including people with disabilities � and promote equitable outcomes.
+Ensure that generative AI systems and their outputs are designed, developed, and deployed to be accessible to all users &mdash; including people with disabilities &mdash; and promote equitable outcomes.
 
 **Scope**
 

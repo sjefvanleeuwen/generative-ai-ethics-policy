@@ -6,11 +6,11 @@ This glossary defines key terms used throughout the policy to ensure common unde
 | --- | --- | --- |
 | **Term** | **Definition** | **Explanation/Context** |
 | Generative AI | AI models that create new content (text, images, code, audio) from learned patterns | Includes large language models (LLMs) and generative image/audio tools used internally or externally. |
-| High‑Risk AI | AI systems classified as high risk under the EU AI Act due to potential impact on fundamental rights | Examples include AI used in HR evaluations, safety-critical operations, or customer decision-making. |
+| High&hyphen;Risk AI | AI systems classified as high risk under the EU AI Act due to potential impact on fundamental rights | Examples include AI used in HR evaluations, safety-critical operations, or customer decision-making. |
 | Data Protection Impact Assessment (DPIA) | Structured assessment to identify and mitigate privacy risks in processing personal data | Mandatory under GDPR for high-risk AI systems; uses Annex A template. |
 | Bias Audit | Systematic review of training data and AI outputs to detect and remediate discriminatory patterns | Ensures fairness across protected attributes (gender, ethnicity, etc.). |
 | Risk Tier | Classification of AI systems (low, medium, high) per EU AI Act criteria | Determines level of governance, documentation, and oversight required. |
-| Model Provenance | Record of a model�s origin, training data sources, version history, and ownership | Critical for traceability, compliance, and IP management. |
+| Model Provenance | Record of a model&rsquo;s origin, training data sources, version history, and ownership | Critical for traceability, compliance, and IP management. |
 | Large Language Model (LLM) | A generative AI model trained on large text corpora to generate human-like text | Used for chatbots, support responses, and content generation. |
 | Explainability | Ability to provide understandable rationale for AI-driven decisions | Required for transparency, stakeholder trust, and regulatory compliance. |
 | Adversarial Testing | Simulated attacks against AI systems to identify vulnerabilities | Ensures robustness and security against malicious manipulation. |

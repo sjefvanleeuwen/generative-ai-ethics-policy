@@ -6,7 +6,7 @@ Ensure that all data used by generative AI systems is collected, stored, process
 
 **Scope**
 
-Applies to all personal, proprietary, and third-party data used throughout the AI lifecycle�including data ingestion, storage, processing, sharing, and deletion�for all business units and AI use cases.
+Applies to all personal, proprietary, and third-party data used throughout the AI lifecycle&mdash;including data ingestion, storage, processing, sharing, and deletion&mdash;for all business units and AI use cases.
 
 **Key Requirements**
 
