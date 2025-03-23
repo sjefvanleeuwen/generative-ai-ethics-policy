@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>BPMN to SVG Converter</title>
+  <style>
+    html, body, #canvas { height: 100%; margin: 0; padding: 0; }
+    #canvas { display: flex; align-items: center; justify-content: center; }
+  </style>
+  <script src="./node_modules/bpmn-js/dist/bpmn-viewer.development.js"></script>
+</head>
+<body>
+  <div id="canvas"></div>
+  <script>
+    // Get the diagram XML from the URL
+    const xmlParam = new URL(window.location.href).searchParams.get('xml');
+    const xml = xmlParam ? decodeURIComponent(xmlParam) : null;
+    
+    if (xml) {
+      const viewer = new BpmnJS({ container: '#canvas' });
+      
+      viewer.importXML(xml).then(({ warnings }) => {
+        if (warnings.length) {
+          console.warn('BPMN import warnings:', warnings);
+        }
+        
+        // Adjust the view to fit the diagram
+        viewer.get('canvas').zoom('fit-viewport');
+        
+        // Signal that the rendering is complete
+        window.renderedSvg = viewer.get('canvas')._svg.outerHTML;
+        window.renderingComplete = true;
+      }).catch(err => {
+        console.error('BPMN import error:', err);
+      });
+    }
+  </script>
+</body>
+</html>
+  

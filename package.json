@@ -1,0 +1,31 @@
+{
+  "name": "generative-ai-ethics-policy-wiki",
+  "version": "1.0.0",
+  "description": "A simple wiki viewer for Generative AI Ethics Policy",
+  "main": "index.html",
+  "scripts": {
+    "start": "node build.js start",
+    "build": "node build.js",
+    "convert-bpmn": "node bpmn-to-svg.js",
+    "embed-diagrams": "node bpmn-to-markdown.js",
+    "update-diagrams": "node bpmn-to-markdown.js"
+  },
+  "dependencies": {
+    "bpmn-js": "^11.5.0",
+    "highlight.js": "^11.8.0",
+    "marked": "^9.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "puppeteer": "^24.4.0"
+  },
+  "keywords": [
+    "generative-ai",
+    "ethics",
+    "policy",
+    "wiki",
+    "bpmn"
+  ],
+  "author": "",
+  "license": "MIT"
+}
