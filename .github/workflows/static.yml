@@ -22,25 +22,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
+  # Single build job that handles artifact creation and deployment preparation
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      
       - name: Setup Pages
         uses: actions/configure-pages@v3
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
+      
       - name: Install dependencies
         run: npm install
+      
       - name: Build
         run: npm run build
-        
-      # Upload artifact - using only the GitHub Pages specific artifact uploader
+      
+      # Upload artifact directly using the Pages artifact uploader
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
