@@ -538,6 +538,66 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Load BPMN from file as text to avoid MIME type issues
+    function loadBpmnFromFile(viewer, filePath, container) {
+        return new Promise((resolve, reject) => {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to load BPMN file: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(bpmnXml => {
+                    if (!bpmnXml || bpmnXml.trim() === '') {
+                        throw new Error('Empty BPMN XML received');
+                    }
+                    
+                    // Ensure bpmnXml is passed directly without quotes
+                    // The content is already a string from response.text()
+                    console.log(`Importing XML content of length: ${bpmnXml.length}`);
+                    return viewer.importXML(bpmnXml);
+                })
+                .then(resolve)
+                .catch(reject);
+        });
+    }
+
+    // Try multiple approaches to load BPMN content 
+    function tryLoadBpmnContent(viewer, bpmnFile, container, hardcodedBpmnXml) {
+        console.log(`Attempting to load BPMN content for ${bpmnFile}`);
+        
+        // First try: Direct file loading with proper path
+        loadBpmnFromFile(viewer, `bpmn/${bpmnFile}`, container)
+            .catch(() => {
+                console.log(`Direct file loading failed for ${bpmnFile}, trying root-relative path`);
+                // Second try: Try with root-relative path
+                return loadBpmnFromFile(viewer, `/bpmn/${bpmnFile}`, container);
+            })
+            .catch(() => {
+                console.log(`Root-relative path failed for ${bpmnFile}, trying as Text/XML`);
+                // Third try: Try as text/xml
+                return loadBpmnAsTextXml(viewer, bpmnFile, container);
+            })
+            .catch(() => {
+                console.log(`Text/XML approach failed for ${bpmnFile}, using hardcoded XML`);
+                // Final fallback: Use hardcoded XML
+                if (hardcodedBpmnXml[bpmnFile]) {
+                    // Pass the hardcoded XML directly - don't wrap in additional quotes
+                    console.log(`Using hardcoded XML for ${bpmnFile}`);
+                    return viewer.importXML(hardcodedBpmnXml[bpmnFile]);
+                } else {
+                    throw new Error('No hardcoded XML available for this diagram');
+                }
+            })
+            .then(result => {
+                // ...existing code...
+            })
+            .catch(err => {
+                // ...existing code...
+            });
+    }
+
     // Load a BPMN diagram
     function loadBpmnDiagram(bpmnFile) {
         const contentElement = document.getElementById('content');
