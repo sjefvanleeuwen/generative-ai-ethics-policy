@@ -288,7 +288,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if BPMN.js is loaded
         if (typeof BpmnJS === 'undefined') {
             console.warn('BPMN.js not loaded yet, trying again in 1000ms');
-            // If not loaded, wait and try again with longer timeout
             setTimeout(initializeBpmnViewers, 1000);
             return;
         }
@@ -323,6 +322,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Create viewer instance with navigation options enabled
                 const viewer = new BpmnJS({
                     container: `#${viewerId}`,
+                    width: '100%',
+                    height: '400px',
                     keyboard: {
                         bindTo: document
                     },
@@ -334,16 +335,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Store viewer instance for later use
                 window[viewerId] = viewer;
                 
-                // Construct correct path to BPMN file
-                const bpmnFilePath = `./bpmn/${bpmnFile}`;
+                // Fix for GitHub Pages: use absolute path with repository name
+                // Construct correct path to BPMN file, accounting for GitHub Pages base path
+                const basePath = window.location.pathname.includes('/generative-ai-ethics-policy') 
+                    ? '/generative-ai-ethics-policy' 
+                    : '';
+                const bpmnFilePath = `${basePath}/bpmn/${bpmnFile}`;
                 
-                // Load the BPMN XML - log the exact URL for debugging
                 console.log(`Loading BPMN from: ${bpmnFilePath}`);
                 
                 fetch(bpmnFilePath)
                     .then(response => {
                         if (!response.ok) {
-                            throw new Error(`Failed to load BPMN file: ${response.status}`);
+                            throw new Error(`Failed to load BPMN file (${response.status}): ${bpmnFilePath}`);
                         }
                         return response.text();
                     })
@@ -355,15 +359,27 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.log(`BPMN diagram loaded successfully for ${bpmnFile}`);
                         const canvas = viewer.get('canvas');
                         canvas.zoom('fit-viewport', 'auto');
+                        
+                        // Make the container visible after loading
                         container.classList.add('bpmn-loaded');
+                        canvasElement.style.visibility = 'visible';
+                        canvasElement.style.height = '400px';
+                        
+                        // Force a redraw by resizing
+                        setTimeout(() => {
+                            viewer.get('canvas').resized();
+                        }, 200);
                     })
                     .catch(err => {
                         console.error(`Error loading BPMN diagram ${bpmnFile}:`, err);
-                        loadFallbackSvg(bpmnFile, canvasElement, container);
+                        loadFallbackSvg(bpmnFile, canvasElement, container, basePath);
                     });
             } catch (error) {
                 console.error(`Error initializing BPMN viewer for ${bpmnFile}:`, error);
-                loadFallbackSvg(bpmnFile, canvasElement, container);
+                const basePath = window.location.pathname.includes('/generative-ai-ethics-policy') 
+                    ? '/generative-ai-ethics-policy' 
+                    : '';
+                loadFallbackSvg(bpmnFile, canvasElement, container, basePath);
             }
         });
         
@@ -402,8 +418,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Helper function to load fallback SVG
-    function loadFallbackSvg(bpmnFile, canvasElement, container) {
-        const svgPath = `./bpmn/svg/${bpmnFile.replace('.bpmn', '.svg')}`;
+    function loadFallbackSvg(bpmnFile, canvasElement, container, basePath = '') {
+        const svgPath = `${basePath}/bpmn/svg/${bpmnFile.replace('.bpmn', '.svg')}`;
         console.log(`Attempting to load fallback SVG: ${svgPath}`);
         
         fetch(svgPath)
@@ -413,6 +429,8 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(svgContent => {
                 canvasElement.innerHTML = svgContent;
+                canvasElement.style.visibility = 'visible';
+                canvasElement.style.height = '400px';
                 console.log(`Loaded SVG fallback for ${bpmnFile}`);
                 container.classList.add('svg-fallback-loaded');
             })
@@ -422,9 +440,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="bpmn-error">
                         <h4>Diagram Unavailable</h4>
                         <p>The process diagram could not be loaded.</p>
-                        <p>Please check that BPMN files are in the correct location.</p>
+                        <p>Please check browser console for details.</p>
                     </div>
                 `;
+                canvasElement.style.visibility = 'visible';
             });
     }
 
