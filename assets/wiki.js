@@ -271,9 +271,9 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
   <div class="bpmn-canvas" id="${viewerId}" data-bpmn-file="${bpmnFile}"></div>
-  <div class="static-svg-fallback">
+  <div class="bpmn-fallback">
+    <p><strong>Static Diagram:</strong> The interactive diagram could not be loaded.</p>
     <img src="bpmn/svg/${svgFile}" alt="${title} Diagram" class="fallback-svg" />
-    <p>Fallback static diagram</p>
   </div>
 </div>
 
