@@ -51,12 +51,15 @@ Multiply the Likelihood score by the highest applicable Impact score to determin
 
 The risk heat map visually represents the intersection of likelihood (rows) and impact (columns):
 
-- **Critical Risk (16-25)**: Very high impact + high/very high likelihood; or Very high likelihood + high/very high impact
-- **High Risk (10-15)**: Medium impact + high/very high likelihood; High impact + medium/high likelihood; Very high impact + low/medium likelihood
-- **Medium Risk (5-9)**: Low impact + high/very high likelihood; Medium impact + medium likelihood; High impact + low likelihood
-- **Low Risk (1-4)**: Very low/low impact + very low/low likelihood; Very low impact + any likelihood; Very low likelihood + any impact
+| Likelihood | Very Low Impact (1) | Low Impact (2) | Medium Impact (3) | High Impact (4) | Very High Impact (5) |
+|------------|---------------------|----------------|-------------------|-----------------|----------------------|
+| **Very High (5)** | Medium (5) | High (10) | High (15) | Critical (20) | Critical (25) |
+| **High (4)** | Low (4) | Medium (8) | High (12) | Critical (16) | Critical (20) |
+| **Medium (3)** | Low (3) | Medium (6) | Medium (9) | High (12) | High (15) |
+| **Low (2)** | Low (2) | Low (4) | Medium (6) | Medium (8) | High (10) |
+| **Very Low (1)** | Low (1) | Low (2) | Low (3) | Low (4) | Medium (5) |
 
-*Note: Use the risk heat map to quickly identify the highest risk areas requiring immediate attention.*
+*Note: The values in parentheses represent the risk score (Likelihood × Impact). Use this heat map to quickly identify the highest risk areas requiring immediate attention.*
 
 ## 6. Risk Treatment Options
 
