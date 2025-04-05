@@ -580,6 +580,76 @@ if (fs.existsSync(bpmnDir)) {
   console.warn('BPMN directory not found!');
 }
 
+// Copy BPMN.io directly from node_modules to ensure version consistency
+console.log('Copying BPMN.io from node_modules...');
+const bpmnJsDir = path.join(distDir, 'js', 'bpmn-js');
+if (!fs.existsSync(bpmnJsDir)) {
+  fs.mkdirSync(bpmnJsDir, { recursive: true });
+}
+
+// Copy the specific bpmn-js distributable files from node_modules
+const bpmnJsNodeModule = path.join('node_modules', 'bpmn-js', 'dist');
+if (fs.existsSync(bpmnJsNodeModule)) {
+  // Copy the minified version
+  fs.copyFileSync(
+    path.join(bpmnJsNodeModule, 'bpmn-navigated-viewer.production.min.js'),
+    path.join(bpmnJsDir, 'bpmn-navigated-viewer.min.js')
+  );
+  console.log('Copied bpmn-js library from node_modules');
+  
+  // Also copy the development version for better debugging
+  fs.copyFileSync(
+    path.join(bpmnJsNodeModule, 'bpmn-navigated-viewer.development.js'),
+    path.join(bpmnJsDir, 'bpmn-navigated-viewer.js')
+  );
+  console.log('Copied bpmn-js development version for debugging');
+
+  // Copy the CSS file if it exists
+  const bpmnCssPath = path.join(bpmnJsNodeModule, 'assets', 'bpmn-js.css');
+  if (fs.existsSync(bpmnCssPath)) {
+    const cssDir = path.join(distDir, 'css');
+    if (!fs.existsSync(cssDir)) {
+      fs.mkdirSync(cssDir, { recursive: true });
+    }
+    fs.copyFileSync(bpmnCssPath, path.join(cssDir, 'bpmn-js.css'));
+    console.log('Copied bpmn-js CSS');
+  }
+} else {
+  console.warn('bpmn-js not found in node_modules! Using bundled version instead.');
+}
+
+// Create directories for static assets
+console.log('Creating directories for static assets...');
+const imagesDir = path.join(distDir, 'images');
+
+// Create directories if they don't exist
+if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
+
+// Copy images to dist directory
+console.log('Copying images to dist directory...');
+const sourceImagesDir = path.join(__dirname, 'images');
+if (fs.existsSync(sourceImagesDir)) {
+  const imageFiles = fs.readdirSync(sourceImagesDir);
+  console.log(`Found ${imageFiles.length} images to copy`);
+  
+  imageFiles.forEach(file => {
+    const sourcePath = path.join(sourceImagesDir, file);
+    const destPath = path.join(imagesDir, file);
+    
+    // Check if source is a file (not a directory)
+    if (fs.statSync(sourcePath).isFile()) {
+      fs.copyFileSync(sourcePath, destPath);
+      console.log(`Copied ${file} to ${destPath}`);
+    } else {
+      console.log(`Skipping directory ${file}`);
+    }
+  });
+} else {
+  console.warn('Images directory not found in source!');
+  console.log('Creating empty images directory in dist...');
+  fs.mkdirSync(imagesDir, { recursive: true });
+}
+
 // Main build process
 async function build() {
   try {
