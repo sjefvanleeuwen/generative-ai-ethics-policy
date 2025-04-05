@@ -2,7 +2,7 @@
 
 A comprehensive, enterprise-ready policy framework for responsible AI governance. This interactive wiki provides organizations with a complete set of policies, processes, and templates for ethically implementing generative AI systems.
 
-![Policy Wiki Screenshot](images/ai-ethics-impression.png)
+![Policy Wiki Screenshot](assets/policy-screenshot.png)
 
 ## 📋 What's Included
 
@@ -29,7 +29,6 @@ This project demonstrates the power of AI-assisted development:
 
 - **GitHub Copilot**: Used for code generation and policy drafting
 - **Claude 3.7 Sonnet**: Leveraged for complex policy content and reasoning
-- **Midjourney**: Created visual assets, diagrams, and the "At a Glance" poster artwork
 - **BPMN.io**: Integrated for interactive process diagrams
 - **Markdown + JavaScript**: Static site generation for easy deployment
 - **GitHub Pages**: Seamless publishing via GitHub Actions
