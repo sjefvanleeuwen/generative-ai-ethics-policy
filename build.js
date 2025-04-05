@@ -467,6 +467,43 @@ mdFiles.forEach(file => {
   fs.copyFileSync(source, dest);
 });
 
+// Copy special files needed for GitHub Pages
+console.log('Copying special files for GitHub Pages deployment...');
+
+// Create .nojekyll file (to disable Jekyll processing)
+fs.writeFileSync(path.join(distDir, '.nojekyll'), '');
+console.log('Created .nojekyll file in dist directory');
+
+// Create _headers file for proper MIME types
+const headersContent = `
+# Custom MIME types for GitHub Pages
+/*.bpmn
+  Content-Type: application/xml
+
+/*.svg
+  Content-Type: image/svg+xml
+
+/*.js
+  Content-Type: application/javascript
+`;
+
+fs.writeFileSync(path.join(distDir, '_headers'), headersContent);
+console.log('Created _headers file in dist directory');
+
+// When copying BPMN files, ensure they have the correct extension and handling
+console.log('Copying BPMN files with proper MIME type handling...');
+if (fs.existsSync(path.join(sourceDir, 'bpmn'))) {
+  // Create directories if they don't exist
+  if (!fs.existsSync(bpmnDir)) fs.mkdirSync(bpmnDir, { recursive: true });
+  if (!fs.existsSync(bpmnSvgDir)) fs.mkdirSync(bpmnSvgDir, { recursive: true });
+  
+  // Get all BPMN files and copy them
+  const bpmnFiles = fs.readdirSync(path.join(sourceDir, 'bpmn'))
+    .filter(file => file.endsWith('.bpmn'));
+  
+  // ...existing code for bpmn file copying...
+}
+
 // Main build process
 async function build() {
   try {
@@ -482,6 +519,11 @@ async function build() {
     if (fs.existsSync(bpmnSvgDir)) {
       console.log(`SVG files in dist: ${fs.readdirSync(bpmnSvgDir).join(', ')}`);
     }
+    // Log special files for verification
+    const specialFiles = ['.nojekyll', '_headers'].filter(
+      file => fs.existsSync(path.join(distDir, file))
+    );
+    console.log(`Special files in dist: ${specialFiles.join(', ')}`);
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);

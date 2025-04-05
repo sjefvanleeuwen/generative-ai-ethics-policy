@@ -272,24 +272,28 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <div class="bpmn-canvas" id="${viewerId}" data-bpmn-file="${bpmnFile}"></div>
   <div class="static-svg-fallback">
+    <p><strong>Interactive Diagram</strong> (or <a href="bpmn/svg/${svgFile}" target="_blank">view static SVG</a>)</p>
     <img src="bpmn/svg/${svgFile}" alt="${title} Diagram" class="fallback-svg" />
   </div>
 </div>
 
-[View/download BPMN XML](bpmn/${bpmnFile})`;
+[Download BPMN XML](bpmn/${bpmnFile})`;
         });
     }
 
-    // Initialize BPMN viewers on the page
+    // Initialize BPMN viewers with improved error handling for MIME type issues
     function initializeBpmnViewers() {
         console.log('Initializing BPMN viewers...');
         
         // Check if BPMN.js is loaded
         if (typeof BpmnJS === 'undefined') {
-            console.warn('BPMN.js not loaded yet, showing SVG fallback instead');
-            // Show all fallback SVGs since BPMN.js isn't available
+            console.warn('BPMN.js not loaded yet or MIME type issues, showing SVG fallbacks');
+            // Show all SVG fallbacks since BPMN.js isn't available or working
             document.querySelectorAll('.static-svg-fallback').forEach(fallback => {
                 fallback.style.display = 'block';
+            });
+            document.querySelectorAll('.bpmn-canvas').forEach(canvas => {
+                canvas.style.display = 'none';
             });
             return;
         }
