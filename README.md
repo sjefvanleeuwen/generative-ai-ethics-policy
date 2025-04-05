@@ -1,50 +1,106 @@
 # Generative AI Ethics Policy Wiki
 
-This is a simple wiki-style viewer for the Generative AI Ethics Policy documents.
+A comprehensive, enterprise-ready policy framework for responsible AI governance. This interactive wiki provides organizations with a complete set of policies, processes, and templates for ethically implementing generative AI systems.
 
-## Getting Started
+![Policy Wiki Screenshot](images/ai-ethics-impression.png)
 
-To run the wiki locally:
+## 📋 What's Included
 
-1. Make sure you have [Node.js](https://nodejs.org/) installed
-2. Install dependencies:
-   ```
-   npm install
-   ```
-3. Generate SVG files from BPMN diagrams and embed them in Markdown:
-   ```
-   npm run embed-diagrams
-   ```
-4. Start the local server:
-   ```
-   npm start
-   ```
-5. Your browser will open automatically to the wiki homepage
+This framework provides a complete enterprise solution for AI governance:
 
-## Build Process
+- **Core Policy (20+ Sections)**: Covers everything from governance structures to risk management, transparency requirements, human oversight protocols, and more
+- **Interactive Process Diagrams**: 8 BPMN diagrams visualizing key workflows like AI risk assessment, incident response, and vendor vetting
+- **Implementation Templates (15+ Annexes)**: Ready-to-use forms for DPIAs, incident response, explainability reports, and more
+- **"At a Glance" Poster**: Visual summary of core requirements for easy employee reference
 
-The build process is cross-platform compatible (Windows, macOS, Linux) and performs the following:
+### Key Policy Components
 
-1. Creates a `dist` directory if it doesn't exist
-2. Copies all HTML, JavaScript, CSS, and Markdown files to the `dist` directory
-3. Copies the BPMN diagram files and any SVG renderings
-4. Starts an HTTP server (when using `npm start`)
+- **Governance Framework**: Clear roles and responsibilities for AI oversight
+- **Risk Management**: Structured approach to AI risk assessment with matrices and templates
+- **Transparency & Explainability**: Requirements for making AI systems understandable
+- **Human Oversight**: Processes ensuring humans maintain control over AI decisions
+- **Employee Rights**: Protections for data privacy and appeal mechanisms
+- **Regulatory Compliance**: Alignment with EU AI Act, GDPR, and global regulations
+- **Practical Implementation**: Roadmap, rollout plans, and executive approval templates
 
-To build without starting the server:
-````
+## 🛠️ How This Was Built
 
-## Structure
+This project demonstrates the power of AI-assisted development:
 
-- `index.html` - The main HTML file for the wiki viewer
-- `styles.css` - CSS styling for the wiki
-- `wiki.js` - JavaScript code that powers the wiki functionality
-- `*.md` - Markdown files containing the policy content
-- `package.json` - Node.js package configuration
+- **GitHub Copilot**: Used for code generation and policy drafting
+- **Claude 3.7 Sonnet**: Leveraged for complex policy content and reasoning
+- **Midjourney**: Created visual assets, diagrams, and the "At a Glance" poster artwork
+- **BPMN.io**: Integrated for interactive process diagrams
+- **Markdown + JavaScript**: Static site generation for easy deployment
+- **GitHub Pages**: Seamless publishing via GitHub Actions
 
-## Navigation
+## 🚀 Getting Started
 
-The sidebar on the left contains links to all policy sections. The Table of Contents provides an overview of the entire policy. Each page has navigation controls at the bottom to move between sections.
+### Prerequisites
 
-## Development
+- Node.js (v14+)
+- npm
 
-To modify the wiki functionality, edit the `wiki.js` file. For styling changes, modify `styles.css`.
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/generative-ai-ethics-policy.git
+
+# Navigate to project directory
+cd generative-ai-ethics-policy
+
+# Install dependencies
+npm install
+```
+
+### Local Development
+
+```bash
+# Start local development server
+npm start
+
+# Build for production
+npm run build
+```
+
+## 🔧 Customization
+
+### Adapting for Your Organization
+
+1. **Policy Content**: Edit the markdown (.md) files to align with your organization's requirements
+2. **Process Diagrams**: Modify BPMN files using [BPMN.io](https://bpmn.io/toolkit/bpmn-js/) and save to the `bpmn/` directory
+3. **Company Branding**: Update styles in the build.js file to match your corporate identity
+4. **Regulatory Focus**: Emphasize sections relevant to your jurisdiction and industry
+
+### Implementation Strategy
+
+Start with the key sections most relevant to your immediate needs:
+
+1. Review the Executive Summary and Governance structure
+2. Complete the Risk Assessment templates for your AI systems
+3. Implement the core technical measures from Data Governance and Security
+4. Roll out training using the provided materials
+5. Establish monitoring mechanisms described in the Audit section
+
+## 📤 Deployment
+
+This project is configured for GitHub Pages deployment via GitHub Actions:
+
+1. Fork/push to your GitHub repository
+2. Enable GitHub Pages in repository settings
+3. The Action workflow will build and deploy automatically
+
+For other hosting options, the `dist/` directory contains all deployment files.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgements
+
+- [BPMN.io](https://bpmn.io/) for the process diagram renderer
+- [Marked.js](https://marked.js.org/) for Markdown parsing
+- [GitHub Copilot](https://github.com/features/copilot) for code assistance
+- [Claude AI](https://claude.ai) for policy content development
+- European Union AI Act framework which informed policy structure
