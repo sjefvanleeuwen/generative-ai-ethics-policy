@@ -271,8 +271,9 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
   <div class="bpmn-canvas" id="${viewerId}" data-bpmn-file="${bpmnFile}"></div>
+  <div class="bpmn-loading">Loading diagram...</div>
   <div class="bpmn-fallback">
-    <p><strong>Static Diagram:</strong> The interactive diagram could not be loaded.</p>
+    <p><strong>Static Diagram</strong></p>
     <img src="bpmn/svg/${svgFile}" alt="${title} Diagram" class="fallback-svg" />
   </div>
 </div>
@@ -305,6 +306,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let loadedCount = 0;
         viewerContainers.forEach(container => {
             const canvasElement = container.querySelector('.bpmn-canvas');
+            const loadingElement = container.querySelector('.bpmn-loading');
+            
             if (!canvasElement) {
                 console.error('Canvas element not found in container');
                 showFallbackSvg(container);
@@ -338,6 +341,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const bpmnFilePath = `./bpmn/${bpmnFile}`;
                 console.log(`Loading BPMN from: ${bpmnFilePath} as text`);
                 
+                // Set a timeout to handle cases where the loading hangs
+                const loadingTimeout = setTimeout(() => {
+                    console.warn(`Loading timeout for ${bpmnFile}, showing fallback`);
+                    if (loadingElement) loadingElement.style.display = 'none';
+                    showFallbackSvg(container);
+                }, 5000);
+                
                 fetch(bpmnFilePath)
                     .then(response => {
                         if (!response.ok) {
@@ -356,15 +366,28 @@ document.addEventListener('DOMContentLoaded', function() {
                         return viewer.importXML(bpmnXml);
                     })
                     .then(() => {
+                        clearTimeout(loadingTimeout);
                         console.log(`BPMN diagram loaded successfully for ${bpmnFile}`);
+                        
+                        if (loadingElement) loadingElement.style.display = 'none';
+                        container.classList.add('bpmn-loaded');
+                        
+                        // Hide the fallback
+                        const fallback = container.querySelector('.bpmn-fallback');
+                        if (fallback) fallback.style.display = 'none';
+                        
+                        // Show the canvas
+                        if (canvasElement) canvasElement.style.display = 'block';
+                        
                         const canvas = viewer.get('canvas');
                         canvas.zoom('fit-viewport', 'auto');
-                        container.classList.add('bpmn-loaded');
                         loadedCount++;
                     })
                     .catch(err => {
+                        clearTimeout(loadingTimeout);
                         console.error(`Error loading BPMN diagram ${bpmnFile}:`, err);
                         
+                        if (loadingElement) loadingElement.style.display = 'none';
                         // Try loading from hardcoded XML as a last resort
                         tryLoadHardcodedBpmn(bpmnFile, viewer, container).catch(() => {
                             // If that also fails, show fallback SVG
@@ -373,6 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
             } catch (error) {
                 console.error(`Error initializing BPMN viewer for ${bpmnFile}:`, error);
+                if (loadingElement) loadingElement.style.display = 'none';
                 showFallbackSvg(container);
             }
         });
@@ -383,7 +407,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.warn('No BPMN diagrams loaded successfully, showing all fallbacks');
                 document.querySelectorAll('.bpmn-viewer-container').forEach(container => {
                     if (!container.classList.contains('bpmn-loaded')) {
-                        showFallbackSvg(container);
+                        const loadingElement = container.querySelector('.bpmn-loading');
+                        if (loadingElement && loadingElement.style.display !== 'none') {
+                            loadingElement.style.display = 'none';
+                            showFallbackSvg(container);
+                        }
                     }
                 });
             }
@@ -713,6 +741,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         .bpmn-loaded .bpmn-canvas {
             border: 1px solid #d4edda;
+            display: block;
         }
         .bpmn-instructions {
             font-size: 0.85em;
@@ -728,7 +757,13 @@ document.addEventListener('DOMContentLoaded', function() {
             background-color: #f6f8fa;
             border-bottom: 1px solid #ddd;
         }
-        .static-svg-fallback {
+        .bpmn-loading {
+            text-align: center;
+            padding: 20px;
+            color: #0066cc;
+            font-weight: bold;
+        }
+        .bpmn-fallback {
             display: none;
             margin-top: 10px;
             padding: 10px;
@@ -736,7 +771,7 @@ document.addEventListener('DOMContentLoaded', function() {
             background: #f9f9f9;
             text-align: center;
         }
-        .using-fallback .static-svg-fallback {
+        .using-fallback .bpmn-fallback {
             display: block;
         }
         .fallback-svg {
@@ -744,7 +779,8 @@ document.addEventListener('DOMContentLoaded', function() {
             height: auto;
             border: 1px solid #eee;
         }
-        .bpmn-loaded .static-svg-fallback {
+        .bpmn-loaded .bpmn-fallback,
+        .bpmn-loaded .bpmn-loading {
             display: none;
         }
     `;
