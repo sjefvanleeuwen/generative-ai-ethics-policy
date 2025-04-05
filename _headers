@@ -1,0 +1,10 @@
+
+# Custom MIME types for GitHub Pages
+/*.bpmn
+  Content-Type: application/xml
+
+/*.svg
+  Content-Type: image/svg+xml
+
+/*.js
+  Content-Type: application/javascript
