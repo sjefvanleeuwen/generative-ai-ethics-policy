@@ -504,6 +504,76 @@ if (fs.existsSync(path.join(sourceDir, 'bpmn'))) {
   // ...existing code for bpmn file copying...
 }
 
+// Generate SVG placeholders for BPMN diagrams
+console.log('Generating SVG placeholders for BPMN diagrams...');
+if (fs.existsSync(bpmnDir)) {
+  // Create SVG directory if it doesn't exist
+  if (!fs.existsSync(bpmnSvgDir)) {
+    fs.mkdirSync(bpmnSvgDir, { recursive: true });
+  }
+  
+  // Get all BPMN files
+  const bpmnFiles = fs.readdirSync(bpmnDir)
+    .filter(file => file.endsWith('.bpmn'));
+  
+  console.log(`Found ${bpmnFiles.length} BPMN files to create SVG placeholders for`);
+  
+  bpmnFiles.forEach(file => {
+    const svgOutput = path.join(bpmnSvgDir, file.replace('.bpmn', '.svg'));
+    console.log(`Creating SVG placeholder for ${file} at ${svgOutput}`);
+    
+    // Extract diagram title from filename
+    const diagramTitle = file.replace('.bpmn', '')
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    
+    // Create a placeholder SVG with more diagram-like appearance
+    const placeholderSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+      <rect width="100%" height="100%" fill="#f8f9fa" />
+      <text x="400" y="30" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">
+        ${diagramTitle}
+      </text>
+      <rect x="50" y="50" width="700" height="300" fill="#ffffff" stroke="#cccccc" stroke-width="1" />
+      
+      <!-- Simple process flow elements -->
+      <circle cx="150" cy="200" r="30" fill="#e1f5fe" stroke="#0277bd" stroke-width="2"/>
+      <text x="150" y="205" font-family="Arial" font-size="12" text-anchor="middle">Start</text>
+      
+      <rect x="250" y="170" width="120" height="60" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="5" ry="5"/>
+      <text x="310" y="205" font-family="Arial" font-size="12" text-anchor="middle">Process</text>
+      
+      <rect x="450" y="170" width="120" height="60" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="5" ry="5"/>
+      <text x="510" y="205" font-family="Arial" font-size="12" text-anchor="middle">Process</text>
+      
+      <circle cx="650" cy="200" r="30" fill="#fce4ec" stroke="#c2185b" stroke-width="2"/>
+      <text x="650" y="205" font-family="Arial" font-size="12" text-anchor="middle">End</text>
+      
+      <!-- Connection arrows -->
+      <line x1="180" y1="200" x2="250" y2="200" stroke="#666666" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="370" y1="200" x2="450" y2="200" stroke="#666666" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="570" y1="200" x2="620" y2="200" stroke="#666666" stroke-width="2" marker-end="url(#arrow)"/>
+      
+      <!-- Arrow marker definition -->
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <path d="M0,0 L0,10 L10,5 Z" fill="#666666" />
+        </marker>
+      </defs>
+      
+      <!-- Note at bottom -->
+      <text x="400" y="380" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">
+        Static fallback for ${diagramTitle}
+      </text>
+    </svg>`;
+    
+    fs.writeFileSync(svgOutput, placeholderSvg);
+    console.log(`Created SVG placeholder for ${file}`);
+  });
+} else {
+  console.warn('BPMN directory not found!');
+}
+
 // Main build process
 async function build() {
   try {
