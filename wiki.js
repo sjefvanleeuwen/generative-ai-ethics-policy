@@ -271,9 +271,8 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
   <div class="bpmn-canvas" id="${viewerId}" data-bpmn-file="${bpmnFile}"></div>
-  <div class="bpmn-fallback">
-    <p>If the diagram doesn't load, <a href="bpmn/svg/${svgFile}" target="_blank">view diagram directly</a> 
-    or <a href="bpmn/${bpmnFile}" download>download BPMN file</a></p>
+  <div class="static-svg-fallback">
+    <img src="bpmn/svg/${svgFile}" alt="${title} Diagram" class="fallback-svg" />
   </div>
 </div>
 
@@ -287,9 +286,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if BPMN.js is loaded
         if (typeof BpmnJS === 'undefined') {
-            console.warn('BPMN.js not loaded yet, trying again in 1000ms');
-            // If not loaded, wait and try again with longer timeout
-            setTimeout(initializeBpmnViewers, 1000);
+            console.warn('BPMN.js not loaded yet, showing SVG fallback instead');
+            // Show all fallback SVGs since BPMN.js isn't available
+            document.querySelectorAll('.static-svg-fallback').forEach(fallback => {
+                fallback.style.display = 'block';
+            });
             return;
         }
 
@@ -302,10 +303,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        let loadedCount = 0;
         viewerContainers.forEach(container => {
             const canvasElement = container.querySelector('.bpmn-canvas');
             if (!canvasElement) {
-                console.error('Canvas element not found in container', container);
+                console.error('Canvas element not found in container');
+                showFallbackSvg(container);
                 return;
             }
             
@@ -313,34 +316,26 @@ document.addEventListener('DOMContentLoaded', function() {
             const bpmnFile = canvasElement.getAttribute('data-bpmn-file');
             
             if (!bpmnFile) {
-                console.error('No BPMN file specified for viewer', viewerId);
+                console.error('No BPMN file specified for viewer');
+                showFallbackSvg(container);
                 return;
             }
             
             console.log(`Initializing viewer for ${bpmnFile}`);
             
             try {
-                // Create viewer instance with navigation options enabled
+                // Create viewer instance
                 const viewer = new BpmnJS({
                     container: `#${viewerId}`,
-                    keyboard: {
-                        bindTo: document
-                    },
-                    canvas: {
-                        deferUpdate: false
-                    }
+                    keyboard: { bindTo: document },
+                    canvas: { deferUpdate: false }
                 });
-
+                
                 // Store viewer instance for later use
                 window[viewerId] = viewer;
                 
-                // Construct correct path to BPMN file
-                const bpmnFilePath = `./bpmn/${bpmnFile}`;
-                
-                // Load the BPMN XML - log the exact URL for debugging
-                console.log(`Loading BPMN from: ${bpmnFilePath}`);
-                
-                fetch(bpmnFilePath)
+                // Load the BPMN XML
+                fetch(`bpmn/${bpmnFile}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`Failed to load BPMN file: ${response.status}`);
@@ -348,24 +343,39 @@ document.addEventListener('DOMContentLoaded', function() {
                         return response.text();
                     })
                     .then(bpmnXml => {
-                        console.log(`BPMN XML loaded (${bpmnXml.length} bytes)`);
+                        if (!bpmnXml || bpmnXml.trim() === '') {
+                            throw new Error('Empty BPMN XML received');
+                        }
                         return viewer.importXML(bpmnXml);
                     })
-                    .then(result => {
-                        console.log(`BPMN diagram loaded successfully for ${bpmnFile}`);
+                    .then(() => {
+                        console.log(`BPMN diagram loaded for ${bpmnFile}`);
+                        container.classList.add('bpmn-loaded');
                         const canvas = viewer.get('canvas');
                         canvas.zoom('fit-viewport', 'auto');
-                        container.classList.add('bpmn-loaded');
+                        loadedCount++;
                     })
                     .catch(err => {
                         console.error(`Error loading BPMN diagram ${bpmnFile}:`, err);
-                        loadFallbackSvg(bpmnFile, canvasElement, container);
+                        showFallbackSvg(container);
                     });
             } catch (error) {
                 console.error(`Error initializing BPMN viewer for ${bpmnFile}:`, error);
-                loadFallbackSvg(bpmnFile, canvasElement, container);
+                showFallbackSvg(container);
             }
         });
+        
+        // If no diagrams loaded successfully after 3 seconds, show all fallbacks
+        setTimeout(() => {
+            if (loadedCount === 0) {
+                console.warn('No BPMN diagrams loaded successfully, showing all fallbacks');
+                document.querySelectorAll('.bpmn-viewer-container').forEach(container => {
+                    if (!container.classList.contains('bpmn-loaded')) {
+                        showFallbackSvg(container);
+                    }
+                });
+            }
+        }, 3000);
         
         // Add event listeners for zoom buttons
         document.querySelectorAll('.zoom-in').forEach(button => {
@@ -401,31 +411,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Helper function to load fallback SVG
-    function loadFallbackSvg(bpmnFile, canvasElement, container) {
-        const svgPath = `./bpmn/svg/${bpmnFile.replace('.bpmn', '.svg')}`;
-        console.log(`Attempting to load fallback SVG: ${svgPath}`);
-        
-        fetch(svgPath)
-            .then(response => {
-                if (!response.ok) throw new Error(`SVG not found: ${response.status}`);
-                return response.text();
-            })
-            .then(svgContent => {
-                canvasElement.innerHTML = svgContent;
-                console.log(`Loaded SVG fallback for ${bpmnFile}`);
-                container.classList.add('svg-fallback-loaded');
-            })
-            .catch(svgErr => {
-                console.error('SVG fallback also failed:', svgErr);
-                canvasElement.innerHTML = `
-                    <div class="bpmn-error">
-                        <h4>Diagram Unavailable</h4>
-                        <p>The process diagram could not be loaded.</p>
-                        <p>Please check that BPMN files are in the correct location.</p>
-                    </div>
-                `;
-            });
+    // Helper function to show fallback SVG
+    function showFallbackSvg(container) {
+        const fallback = container.querySelector('.static-svg-fallback');
+        if (fallback) {
+            fallback.style.display = 'block';
+            container.classList.add('using-fallback');
+        }
+        const canvas = container.querySelector('.bpmn-canvas');
+        if (canvas) {
+            canvas.style.display = 'none';
+        }
     }
 
     // Load a BPMN diagram
@@ -604,7 +600,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add CSS styles for BPMN errors, loading states, and instructions
+    // Add CSS styles for BPMN errors, loading states, instructions, and fallback
     const style = document.createElement('style');
     style.textContent = `
         .bpmn-error {
@@ -633,15 +629,24 @@ document.addEventListener('DOMContentLoaded', function() {
             background-color: #f6f8fa;
             border-bottom: 1px solid #ddd;
         }
-        .bpmn-fallback {
+        .static-svg-fallback {
             display: none;
-            text-align: center;
+            margin-top: 10px;
             padding: 10px;
-            background-color: #f8f9fa;
-            border-top: 1px solid #ddd;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            text-align: center;
         }
-        .bpmn-viewer-container:not(.bpmn-loaded):not(.svg-fallback-loaded) .bpmn-fallback {
+        .using-fallback .static-svg-fallback {
             display: block;
+        }
+        .fallback-svg {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eee;
+        }
+        .bpmn-loaded .static-svg-fallback {
+            display: none;
         }
     `;
     document.head.appendChild(style);
