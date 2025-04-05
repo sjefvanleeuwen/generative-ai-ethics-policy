@@ -53,7 +53,6 @@ _Description of how AI decisions may impact users:_
 |------------|-------------|-----------------|
 |  |  |  |
 |  |  |  |
-|  |  |  |
 
 ### 6.2 Error Rates & Accuracy
 _Transparent disclosure of known error rates and accuracy metrics:_

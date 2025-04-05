@@ -36,26 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
         xhtml: false
     });
 
-    // Add BPMN viewer scripts to document head
-    function loadBpmnViewerLibrary() {
-        // Skip if already loaded
-        if (document.getElementById('bpmn-viewer-script')) {
-            return Promise.resolve();
-        }
-        
-        return new Promise((resolve, reject) => {
-            // Load BPMN.io viewer from CDN
-            const script = document.createElement('script');
-            script.id = 'bpmn-viewer-script';
-            script.src = 'https://unpkg.com/bpmn-js@11.5.0/dist/bpmn-viewer.development.js';
-            script.async = true;
-            script.onload = resolve;
-            script.onerror = reject;
-            document.head.appendChild(script);
-            
-            console.log('BPMN.js library loaded');
-        });
-    }
+    // No need to load BPMN viewer separately as it's now included in the local assets
+    // The existing code should continue working since we're using the same API
 
     // Policy document structure
     const policyStructure = [
@@ -81,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: '18-Review-and-Change-Management', title: 'Review & Change Management' },
         { id: '19-Implementation-Roadmap', title: 'Implementation Roadmap' },
         { id: '20-Approval-and-Signatures', title: 'Approval & Signatures' },
-        { id: 'process-diagrams', title: 'Process Diagrams' },
         { id: 'rollout', title: 'Rollout Plan' },
         // Add annexes
         { id: 'annex-a', title: 'Annex A: DPIA Template' },
@@ -182,70 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const contentElement = document.getElementById('content');
         contentElement.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>';
         
-        // Special handling for process diagrams page
-        if (docId === 'process-diagrams') {
-            // Load the process diagrams page without adding a duplicate title
-            loadBpmnViewerLibrary()
-                .then(() => {
-                    // Then load process diagrams
-                    return fetch(`${docId}.md`);
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Document not found');
-                    }
-                    return response.text();
-                })
-                .then(markdown => {
-                    // Remove HTML comments (for filepath comments)
-                    markdown = markdown.replace(/<!--.*?-->/gs, '');
-                    
-                    // Convert markdown to HTML
-                    let html = marked.parse(markdown);
-                    
-                    // Add navigation links
-                    const currentIndex = policyStructure.findIndex(item => item.id === docId);
-                    let navigationHtml = '<div class="pagination-nav">';
-                    
-                    if (currentIndex > 0) {
-                        const prevDoc = policyStructure[currentIndex - 1];
-                        navigationHtml += `<div class="prev-page"><a href="javascript:void(0)" data-doc="${prevDoc.id}" class="internal-link">← ${prevDoc.title}</a></div>`;
-                    } else {
-                        navigationHtml += '<div class="prev-page"></div>';
-                    }
-                    
-                    navigationHtml += '<div class="back-to-toc"><a href="javascript:void(0)" data-doc="00-Table-of-Contents" class="internal-link">Table of Contents</a></div>';
-                    
-                    if (currentIndex < policyStructure.length - 1) {
-                        const nextDoc = policyStructure[currentIndex + 1];
-                        navigationHtml += `<div class="next-page"><a href="javascript:void(0)" data-doc="${nextDoc.id}" class="internal-link">${nextDoc.title} →</a></div>`;
-                    } else {
-                        navigationHtml += '<div class="next-page"></div>';
-                    }
-                    
-                    navigationHtml += '</div>';
-                    
-                    // Add navigation to content
-                    contentElement.innerHTML = html + navigationHtml;
-                    
-                    // Initialize BPMN viewers
-                    setTimeout(() => {
-                        initializeBpmnViewers();
-                    }, 100);
-                })
-                .catch(error => {
-                    contentElement.innerHTML = `
-                        <div class="alert alert-danger" role="alert">
-                            <h4 class="alert-heading">Error loading process diagrams</h4>
-                            <p>${error.message}</p>
-                            <hr>
-                            <p class="mb-0">Please try another document from the navigation menu.</p>
-                        </div>
-                    `;
-                });
-            return;
-        }
-        
         // Handle regular documents
         fetch(`${docId}.md`)
             .then(response => {
@@ -298,8 +215,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add navigation to content
                 contentElement.innerHTML = html + navigationHtml;
                 
-                // Initialize BPMN viewers if present
-                initializeBpmnViewers();
+                // Initialize BPMN viewers if present - with a slight delay to ensure DOM is ready
+                setTimeout(initializeBpmnViewers, 100);
                 
                 // Add event listeners to all navigation links in content
                 document.querySelectorAll('.pagination-nav a, .internal-link').forEach(link => {
@@ -346,6 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="bpmn-viewer-container" id="${viewerId}-container">
   <div class="bpmn-toolbar">
     <span>${title}</span>
+    <div class="bpmn-instructions">Click and drag to pan, use buttons to zoom</div>
     <div>
       <button class="zoom-in" data-viewer="${viewerId}">Zoom In</button>
       <button class="zoom-out" data-viewer="${viewerId}">Zoom Out</button>
@@ -353,6 +271,10 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
   <div class="bpmn-canvas" id="${viewerId}" data-bpmn-file="${bpmnFile}"></div>
+  <div class="bpmn-fallback">
+    <p>If the diagram doesn't load, <a href="bpmn/svg/${svgFile}" target="_blank">view diagram directly</a> 
+    or <a href="bpmn/${bpmnFile}" download>download BPMN file</a></p>
+  </div>
 </div>
 
 [View/download BPMN XML](bpmn/${bpmnFile})`;
@@ -365,9 +287,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if BPMN.js is loaded
         if (typeof BpmnJS === 'undefined') {
-            console.warn('BPMN.js not loaded yet, trying again in 100ms');
-            // If not loaded, wait and try again
-            setTimeout(initializeBpmnViewers, 100);
+            console.warn('BPMN.js not loaded yet, trying again in 1000ms');
+            // If not loaded, wait and try again with longer timeout
+            setTimeout(initializeBpmnViewers, 1000);
             return;
         }
 
@@ -375,134 +297,74 @@ document.addEventListener('DOMContentLoaded', function() {
         const viewerContainers = document.querySelectorAll('.bpmn-viewer-container');
         console.log(`Found ${viewerContainers.length} BPMN viewer containers`);
         
+        if (viewerContainers.length === 0) {
+            console.log('No BPMN viewers found on this page');
+            return;
+        }
+        
         viewerContainers.forEach(container => {
             const canvasElement = container.querySelector('.bpmn-canvas');
+            if (!canvasElement) {
+                console.error('Canvas element not found in container', container);
+                return;
+            }
+            
             const viewerId = canvasElement.id;
             const bpmnFile = canvasElement.getAttribute('data-bpmn-file');
             
-            console.log(`Initializing viewer for ${bpmnFile}`);
-            
-            // Create viewer instance with navigation options enabled
-            const viewer = new BpmnJS({
-                container: `#${viewerId}`,
-                keyboard: {
-                    bindTo: document
-                },
-                // Enable panning and zooming features
-                canvas: {
-                    deferUpdate: false
-                }
-            });
-
-            // Add mouse navigation for panning
-            const canvas = viewer.get('canvas');
-            const eventBus = viewer.get('eventBus');
-
-            // Mouse behavior state
-            let mouseDown = false;
-            let lastX, lastY;
-
-            // Add event listeners for mouse panning
-            canvasElement.addEventListener('mousedown', function(event) {
-                // Only enable panning with middle mouse button or when holding Ctrl
-                if (event.button === 1 || event.ctrlKey) {
-                    mouseDown = true;
-                    lastX = event.clientX;
-                    lastY = event.clientY;
-                    
-                    // Add a custom CSS class to change cursor
-                    canvasElement.classList.add('panning');
-                    
-                    // Prevent text selection during panning
-                    event.preventDefault();
-                }
-            });
-            
-            canvasElement.addEventListener('mousemove', function(event) {
-                if (mouseDown) {
-                    const dx = event.clientX - lastX;
-                    const dy = event.clientY - lastY;
-                    
-                    // Get current viewport
-                    const viewbox = canvas.viewbox();
-                    
-                    // Pan the viewport
-                    viewbox.x -= dx / viewbox.scale;
-                    viewbox.y -= dy / viewbox.scale;
-                    
-                    // Apply updated viewport
-                    canvas.viewbox(viewbox);
-                    
-                    lastX = event.clientX;
-                    lastY = event.clientY;
-                    
-                    // Prevent default browser behavior
-                    event.preventDefault();
-                }
-            });
-
-            // Handle mouse up and mouse leave events
-            function endPan() {
-                mouseDown = false;
-                canvasElement.classList.remove('panning');
+            if (!bpmnFile) {
+                console.error('No BPMN file specified for viewer', viewerId);
+                return;
             }
             
-            canvasElement.addEventListener('mouseup', endPan);
-            canvasElement.addEventListener('mouseleave', endPan);
+            console.log(`Initializing viewer for ${bpmnFile}`);
             
-            // Store viewer instance for later use
-            window[viewerId] = viewer;
-            
-            // Construct correct path to BPMN file
-            const bpmnFilePath = `./bpmn/${bpmnFile}`;
-            
-            // Load the BPMN XML - log the exact URL for debugging
-            console.log(`Loading BPMN from: ${bpmnFilePath}`);
-            
-            fetch(bpmnFilePath)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Failed to load BPMN file: ${response.status} ${response.statusText}`);
+            try {
+                // Create viewer instance with navigation options enabled
+                const viewer = new BpmnJS({
+                    container: `#${viewerId}`,
+                    keyboard: {
+                        bindTo: document
+                    },
+                    canvas: {
+                        deferUpdate: false
                     }
-                    return response.text();
-                })
-                .then(bpmnXml => {
-                    console.log(`Loaded BPMN XML for ${bpmnFile} (${bpmnXml.length} bytes)`);
-                    console.log('BPMN XML preview:', bpmnXml.substring(0, 200) + '...');
-                    
-                    // Check if the XML is well-formed
-                    try {
-                        const parser = new DOMParser();
-                        const xmlDoc = parser.parseFromString(bpmnXml, "application/xml");
-                        const parserError = xmlDoc.querySelector("parsererror");
-                        if (parserError) {
-                            throw new Error(`XML parsing error: ${parserError.textContent}`);
-                        }
-                    } catch (e) {
-                        throw new Error(`XML validation error: ${e.message}`);
-                    }
-                    
-                    return viewer.importXML(bpmnXml);
-                })
-                .then(result => {
-                    // Check for import warnings
-                    if (result && result.warnings && result.warnings.length) {
-                        console.warn('BPMN import warnings:', result.warnings);
-                    }
-                    
-                    console.log(`Rendered diagram for ${bpmnFile}`);
-                    // Fit the diagram to the viewport
-                    viewer.get('canvas').zoom('fit-viewport');
-                    // Mark as loaded to hide loading message
-                    canvasElement.classList.add('loaded');
-                })
-                .catch(err => {
-                    console.error('Error rendering BPMN diagram:', err);
-                    canvasElement.innerHTML = `<div class="alert alert-danger">
-                        <p>Error loading diagram: ${err.message}</p>
-                        <p>Please check the browser console for more details.</p>
-                    </div>`;
                 });
+
+                // Store viewer instance for later use
+                window[viewerId] = viewer;
+                
+                // Construct correct path to BPMN file
+                const bpmnFilePath = `./bpmn/${bpmnFile}`;
+                
+                // Load the BPMN XML - log the exact URL for debugging
+                console.log(`Loading BPMN from: ${bpmnFilePath}`);
+                
+                fetch(bpmnFilePath)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Failed to load BPMN file: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(bpmnXml => {
+                        console.log(`BPMN XML loaded (${bpmnXml.length} bytes)`);
+                        return viewer.importXML(bpmnXml);
+                    })
+                    .then(result => {
+                        console.log(`BPMN diagram loaded successfully for ${bpmnFile}`);
+                        const canvas = viewer.get('canvas');
+                        canvas.zoom('fit-viewport', 'auto');
+                        container.classList.add('bpmn-loaded');
+                    })
+                    .catch(err => {
+                        console.error(`Error loading BPMN diagram ${bpmnFile}:`, err);
+                        loadFallbackSvg(bpmnFile, canvasElement, container);
+                    });
+            } catch (error) {
+                console.error(`Error initializing BPMN viewer for ${bpmnFile}:`, error);
+                loadFallbackSvg(bpmnFile, canvasElement, container);
+            }
         });
         
         // Add event listeners for zoom buttons
@@ -539,48 +401,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Load the process diagrams page
-    function loadProcessDiagramsPage() {
-        const contentElement = document.getElementById('content');
+    // Helper function to load fallback SVG
+    function loadFallbackSvg(bpmnFile, canvasElement, container) {
+        const svgPath = `./bpmn/svg/${bpmnFile.replace('.bpmn', '.svg')}`;
+        console.log(`Attempting to load fallback SVG: ${svgPath}`);
         
-        let html = `<h1 class="document-title">Process Diagrams</h1>
-        <p>These BPMN 2.0 diagrams illustrate the key processes described in the policy. Click on any diagram to view it in detail.</p>
-        <div class="bpmn-grid">`;
-        
-        bpmnDiagrams.forEach(diagram => {
-            html += `
-            <div class="bpmn-card">
-                <h3>${diagram.title}</h3>
-                <p>This diagram illustrates the ${diagram.title.toLowerCase()}.</p>
-                <a href="javascript:void(0)" data-bpmn="${diagram.id}" class="bpmn-link btn btn-primary">View Diagram</a>
-            </div>`;
-        });
-        
-        html += '</div>';
-        
-        // Add standard navigation
-        const currentIndex = policyStructure.findIndex(item => item.id === 'process-diagrams');
-        let navigationHtml = '<div class="pagination-nav">';
-        
-        if (currentIndex > 0) {
-            const prevDoc = policyStructure[currentIndex - 1];
-            navigationHtml += `<div class="prev-page"><a href="javascript:void(0)" data-doc="${prevDoc.id}" class="internal-link">← ${prevDoc.title}</a></div>`;
-        } else {
-            navigationHtml += '<div class="prev-page"></div>';
-        }
-        
-        navigationHtml += '<div class="back-to-toc"><a href="javascript:void(0)" data-doc="00-Table-of-Contents" class="internal-link">Table of Contents</a></div>';
-        
-        if (currentIndex < policyStructure.length - 1) {
-            const nextDoc = policyStructure[currentIndex + 1];
-            navigationHtml += `<div class="next-page"><a href="javascript:void(0)" data-doc="${nextDoc.id}" class="internal-link">${nextDoc.title} →</a></div>`;
-        } else {
-            navigationHtml += '<div class="next-page"></div>';
-        }
-        
-        navigationHtml += '</div>';
-        
-        contentElement.innerHTML = html + navigationHtml;
+        fetch(svgPath)
+            .then(response => {
+                if (!response.ok) throw new Error(`SVG not found: ${response.status}`);
+                return response.text();
+            })
+            .then(svgContent => {
+                canvasElement.innerHTML = svgContent;
+                console.log(`Loaded SVG fallback for ${bpmnFile}`);
+                container.classList.add('svg-fallback-loaded');
+            })
+            .catch(svgErr => {
+                console.error('SVG fallback also failed:', svgErr);
+                canvasElement.innerHTML = `
+                    <div class="bpmn-error">
+                        <h4>Diagram Unavailable</h4>
+                        <p>The process diagram could not be loaded.</p>
+                        <p>Please check that BPMN files are in the correct location.</p>
+                    </div>
+                `;
+            });
     }
 
     // Load a BPMN diagram
@@ -735,27 +580,71 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check URL parameters for specific document to load
         const urlParams = new URLSearchParams(window.location.search);
-        const docId = urlParams.get('doc') || 'poster'; // Default to poster page
+        const docId = urlParams.get('doc') || window.defaultDocument || 'poster'; // Use defaultDocument from index.html
         
         // Load the document and update active state
         loadDocument(docId);
         const navLink = document.querySelector(`#toc .nav-link[data-doc="${docId}"]`);
         if (navLink) {
+            document.querySelectorAll('#toc .nav-link').forEach(link => link.classList.remove('active'));
             navLink.classList.add('active');
         }
         
         // Set up browser history handling
         window.addEventListener('popstate', function(e) {
-            if (e.state && e.state.docId) {
-                loadDocument(e.state.docId);
-                // Update active state
-                document.querySelectorAll('#toc .nav-link').forEach(el => {
-                    el.classList.remove('active');
-                });
-                document.querySelector(`#toc .nav-link[data-doc="${e.state.docId}"]`).classList.add('active');
+            const state = e.state;
+            if (state && state.docId) {
+                loadDocument(state.docId);
+                
+                // Update active state in navigation
+                document.querySelectorAll('#toc .nav-link').forEach(link => link.classList.remove('active'));
+                const navLink = document.querySelector(`#toc .nav-link[data-doc="${state.docId}"]`);
+                if (navLink) navLink.classList.add('active');
             }
         });
     }
+
+    // Add CSS styles for BPMN errors, loading states, and instructions
+    const style = document.createElement('style');
+    style.textContent = `
+        .bpmn-error {
+            padding: 20px;
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            margin: 20px;
+            text-align: center;
+        }
+        .bpmn-loaded .bpmn-canvas {
+            border: 1px solid #d4edda;
+        }
+        .bpmn-instructions {
+            font-size: 0.85em;
+            color: #666;
+            margin: 0 10px;
+            font-style: italic;
+        }
+        .bpmn-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #f6f8fa;
+            border-bottom: 1px solid #ddd;
+        }
+        .bpmn-fallback {
+            display: none;
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+        .bpmn-viewer-container:not(.bpmn-loaded):not(.svg-fallback-loaded) .bpmn-fallback {
+            display: block;
+        }
+    `;
+    document.head.appendChild(style);
 
     // Start the application
     init();

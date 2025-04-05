@@ -2,7 +2,7 @@
 
 **Objective**
 
-Ensure that all AI-driven decisions, processes, and outputs are understandable, traceable, and communicated clearly to relevant stakeholders�internal and external�to foster trust, accountability, and compliance with regulatory transparency requirements.
+Ensure that all AI-driven decisions, processes, and outputs are understandable, traceable, and communicated clearly to relevant stakeholders—internal and external—to foster trust, accountability, and compliance with regulatory transparency requirements.
 
 **Scope**
 
@@ -15,7 +15,7 @@ Applies to every generative AI system classified as medium or high risk under th
 | Requirement | Description | Owner | Timeline |
 | Model Documentation | Maintain a central repository of model details (architecture, training data, version history, performance metrics). | IT Engineering | Ongoing |
 | Explainability Reports | Generate detailed reports explaining how key decisions are made by AI, including input features, decision logic, and confidence scores. | IT Engineering | At deployment and quarterly updates |
-| User Disclosures | Provide clear notifications to end users when interacting with AI-generated content, specifying the system�s purpose and limitations. | Business Unit Leads | At rollout |
+| User Disclosures | Provide clear notifications to end users when interacting with AI-generated content, specifying the system’s purpose and limitations. | Business Unit Leads | At rollout |
 | Decision Logs | Record all high-risk AI outputs, human overrides, and rationale for review and audit purposes. | IT Engineering | Real-time logging |
 | Stakeholder Briefings | Conduct quarterly briefings for internal stakeholders (e.g., senior leadership, HR committees) summarizing AI decisions and performance. | AI Ethics Board | Quarterly |
 
