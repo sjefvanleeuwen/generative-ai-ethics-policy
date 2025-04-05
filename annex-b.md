@@ -33,6 +33,22 @@ Applies to all AI-related incidents across the organization, including data brea
 6. **Post-Incident Review** – Lessons learned, policy updates, communication.
 7. **Reporting** – Document findings in Incident Report and Compliance Repository.
 
+## AI Incident Response Process Diagram
+
+<div class="bpmn-viewer-container" id="bpmn-viewer-ai-incident-response-process-bpmn-container">
+  <div class="bpmn-toolbar">
+    <span>AI Incident Response Process</span>
+    <div>
+      <button class="zoom-in" data-viewer="bpmn-viewer-ai-incident-response-process-bpmn">Zoom In</button>
+      <button class="zoom-out" data-viewer="bpmn-viewer-ai-incident-response-process-bpmn">Zoom Out</button>
+      <button class="reset-view" data-viewer="bpmn-viewer-ai-incident-response-process-bpmn">Reset View</button>
+    </div>
+  </div>
+  <div class="bpmn-canvas" id="bpmn-viewer-ai-incident-response-process-bpmn" data-bpmn-file="ai-incident-response-process.bpmn"></div>
+</div>
+
+[View/download BPMN XML](bpmn/ai-incident-response-process.bpmn)
+
 ## 6. Incident Severity Classification
 | Severity | Criteria |
 |----------|----------|

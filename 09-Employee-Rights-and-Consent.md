@@ -27,6 +27,22 @@ Applies to all AI-driven HR activities, including recruitment, performance evalu
 4.  **Appeals Process:** Implement a tiered appeals workflow: HR initial review → Ethics Board review → final decision by Senior HR Executive.
 5.  **Bias Monitoring:** Conduct quarterly bias audits on AI-driven HR decisions; report findings to HR Oversight Committee.
 
+## Employee Appeal Process Diagram
+
+<div class="bpmn-viewer-container" id="bpmn-viewer-ai-appeal-process-bpmn-container">
+  <div class="bpmn-toolbar">
+    <span>Employee AI Decision Appeal Process</span>
+    <div>
+      <button class="zoom-in" data-viewer="bpmn-viewer-ai-appeal-process-bpmn">Zoom In</button>
+      <button class="zoom-out" data-viewer="bpmn-viewer-ai-appeal-process-bpmn">Zoom Out</button>
+      <button class="reset-view" data-viewer="bpmn-viewer-ai-appeal-process-bpmn">Reset View</button>
+    </div>
+  </div>
+  <div class="bpmn-canvas" id="bpmn-viewer-ai-appeal-process-bpmn" data-bpmn-file="ai-appeal-process.bpmn"></div>
+</div>
+
+[View/download BPMN XML](bpmn/ai-appeal-process.bpmn)
+
 **Documentation Requirements**
 
 |     |     |     |     |

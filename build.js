@@ -149,7 +149,50 @@ function build() {
     
     // Copy files and directories
     copyFiles(filesToCopy);
+    
+    // Make sure bpmn directory exists in dist
+    const distBpmnDir = path.join(distDir, 'bpmn');
+    if (!fs.existsSync(distBpmnDir)) {
+        fs.mkdirSync(distBpmnDir, { recursive: true });
+        console.log('  Created bpmn directory in dist');
+    }
+    
+    // Explicitly copy BPMN files
+    const bpmnFiles = [
+        'ai-appeal-process.bpmn',
+        'ai-development-lifecycle.bpmn',
+        'ai-incident-response-process.bpmn',
+        'ai-risk-assessment-process.bpmn',
+        'data-governance-process.bpmn',
+        'dpia-process.bpmn',
+        'human-oversight-process.bpmn',
+        'vendor-assessment-process.bpmn'
+    ];
+    
+    let bpmnFilesCopied = 0;
+    bpmnFiles.forEach(file => {
+        const sourcePath = path.join(sourceDir, 'bpmn', file);
+        const destPath = path.join(distBpmnDir, file);
+        
+        if (fs.existsSync(sourcePath)) {
+            fs.copyFileSync(sourcePath, destPath);
+            console.log(`  Copied BPMN file: ${file} (${fs.statSync(sourcePath).size} bytes)`);
+            bpmnFilesCopied++;
+        } else {
+            console.warn(`  Warning: BPMN file not found at ${sourcePath}`);
+        }
+    });
+    
+    console.log(`  Total BPMN files copied: ${bpmnFilesCopied}`);
+    
+    // Then copy directories (which will also copy bpmn directory, but we've ensured our specific files are there)
     copyDirectories(directoriesToCopy);
+    
+    // Check if BPMN files exist in destination
+    console.log('Verifying BPMN files in dist directory:');
+    fs.readdirSync(distBpmnDir).forEach(file => {
+        console.log(`  Found in dist/bpmn: ${file} (${fs.statSync(path.join(distBpmnDir, file)).size} bytes)`);
+    });
     
     // Make sure we copy all annex files specifically
     const annexFiles = fs.readdirSync(sourceDir)

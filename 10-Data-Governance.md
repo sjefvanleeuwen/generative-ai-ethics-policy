@@ -30,6 +30,22 @@ Applies to all personal, proprietary, and third-party data used throughout the A
 5.  **Retention & Disposal:** Automate data deletion based on retention schedules; document disposal actions in a secure log.
 6.  **Vendor Assessments:** Perform data governance reviews for all third-party AI data providers before onboarding and annually thereafter.
 
+## Data Governance Process Diagram
+
+<div class="bpmn-viewer-container" id="bpmn-viewer-data-governance-process-bpmn-container">
+  <div class="bpmn-toolbar">
+    <span>AI Data Governance Lifecycle</span>
+    <div>
+      <button class="zoom-in" data-viewer="bpmn-viewer-data-governance-process-bpmn">Zoom In</button>
+      <button class="zoom-out" data-viewer="bpmn-viewer-data-governance-process-bpmn">Zoom Out</button>
+      <button class="reset-view" data-viewer="bpmn-viewer-data-governance-process-bpmn">Reset View</button>
+    </div>
+  </div>
+  <div class="bpmn-canvas" id="bpmn-viewer-data-governance-process-bpmn" data-bpmn-file="data-governance-process.bpmn"></div>
+</div>
+
+[View/download BPMN XML](bpmn/data-governance-process.bpmn)
+
 **Documentation Requirements**
 
 |     |     |     |     |

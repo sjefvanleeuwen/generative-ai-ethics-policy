@@ -1,54 +1,123 @@
 # Annex-H: Explainability Report Template
 
-## 1. Report Metadata
+## 1. System Information
 - **AI System Name:**  
+- **Version/Model:**  
 - **Business Unit:**  
-- **Model Version:**  
+- **Type of AI:** (generative text, image, code, etc.)
+- **Deployment Environment:**  
 - **Date of Report:**  
-- **Prepared By:**  
-- **Reviewed By (AI Ethics Board):**  
+- **Report Prepared By:**  
 
-## 2. Use Case Description
-- **Purpose of the AI System:**  
-- **Stakeholders Affected:**  
-- **Decision Type (e.g., classification, scoring, generation):**  
-- **Human-in-the-Loop? (Yes/No):**  
+## 2. Model Overview
+- **Model Architecture:**  
+- **Training Dataset Summary:**  
+- **Key Parameters:**  
+- **Performance Metrics:**  
 
-## 3. Model Overview
-- **Model Type:** (e.g., LLM, CNN, Transformer)  
-- **Training Data Source:**  
-- **Input Features Used:**  
-- **Target Variable:**  
-- **Output Format:**  
+## 3. Decision-Making Process
 
-## 4. Explanation Methodology
-| Technique | Description | Tool Used |
-|-----------|-------------|-----------|
-| Feature Importance | Shows which input features most influence output |             |
-| SHAP/LIME | Local interpretability method used |             |
-| Attention Maps | Visual explanation for text/image models |             |
-| Confidence Scores | Probability estimates per prediction |             |
-| Example-Based Explanation | Compares decision to similar past inputs |             |
+### 3.1 Feature Importance
+| Feature | Importance Score | Role in Decision-Making |
+|---------|-----------------|------------------------|
+|  |  |  |
+|  |  |  |
+|  |  |  |
 
-## 5. Example Explanation
-- **Input Data Sample:**  
-- **Model Output:**  
-- **Explanation of Output:**  
+### 3.2 Decision Logic Explanation
+_Provide a clear, non-technical explanation of how the system processes inputs to produce outputs:_
+
+### 3.3 Confidence Levels
+- **Confidence Scoring Methodology:**  
+- **Typical Confidence Range:**  
+- **Thresholds for Human Review:**  
+
+## 4. Limitations and Constraints
+
+### 4.1 Known Model Limitations
+| Limitation | Description | Potential Impact | Mitigation |
+|------------|-------------|-----------------|------------|
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+
+### 4.2 Edge Cases and Exceptions
+| Edge Case | System Behavior | Recommended Response |
+|-----------|----------------|---------------------|
+|  |  |  |
+|  |  |  |
+|  |  |  |
+
+### 4.3 Context Sensitivity
+_Describe how changes in context can affect the system's outputs:_
+
+## 5. Example Explanations
+_Provide illustrative examples of system outputs with explanations:_
+
+### Example 1
+- **Input:**  
+- **Output:**  
+- **Explanation:**  
+- **Key Factors:**  
 - **Confidence Score:**  
-- **Top Contributing Features:**  
-- **Any Overrides? (If yes, explain rationale):**  
 
-## 6. Bias Check Summary
-- **Bias Mitigation Applied:** (Yes/No)  
-- **Disparities Detected:** (Y/N — explain by demographic group)  
-- **Remediation Actions Taken:**  
+### Example 2
+- **Input:**  
+- **Output:**  
+- **Explanation:**  
+- **Key Factors:**  
+- **Confidence Score:**  
 
-## 7. Stakeholder Review
-- **Was the explanation reviewed with affected stakeholders?** (Yes/No)  
-- **Stakeholder Comments:**  
-- **Changes made based on feedback:**  
+## 6. Human Oversight Integration
 
-## 8. Reviewer Sign-Off
-| Name | Role | Signature | Date |
-|------|------|-----------|------|
-|      |      |           |      |
+### 6.1 Review Triggers
+| Trigger | Threshold | Expected Action |
+|---------|-----------|----------------|
+|  |  |  |
+|  |  |  |
+|  |  |  |
+
+### 6.2 Override Mechanisms
+_Describe how and when human operators can override the system:_
+
+### 6.3 Feedback Loop Process
+_Explain how human feedback is incorporated to improve the system:_
+
+## 7. Stakeholder-Specific Explanations
+
+### 7.1 For End Users
+_Provide simplified explanation suitable for end users:_
+
+### 7.2 For Technical Teams
+_Provide technical details relevant for engineering/IT teams:_
+
+### 7.3 For Compliance/Legal
+_Provide regulatory and compliance-focused explanation:_
+
+## 8. Testing and Validation
+
+### 8.1 Explainability Testing
+| Test Type | Date | Result | Issues | Resolution |
+|-----------|------|--------|--------|------------|
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+### 8.2 User Comprehension Testing
+_Results from testing whether explanations are understood by target audience:_
+
+## 9. Documentation and References
+- **Technical Documentation:**  
+- **Model Cards:**  
+- **Research Papers:**  
+- **Related Policies:**  
+
+## 10. Approval
+| Role | Name | Approval Date | Signature |
+|------|------|--------------|-----------|
+| AI System Owner |  |  |  |
+| Technical Reviewer |  |  |  |
+| Ethics Board |  |  |  |
+| Legal/Compliance |  |  |  |
+
+**Next Explainability Review Due:** ____/____/20__

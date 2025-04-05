@@ -1,51 +1,94 @@
-# Annex-M: IP & License Clearance Checklist
+# Annex-M: IP & License Clearance Form
 
-## 1. Project & Data Context
-- **Project/AI System Name:**  
-- **Department:**  
-- **Data/Model Source Name:**  
-- **Point of Contact:**  
-- **Assessment Date:**  
+## 1. Resource Identification
+- **Resource Name/Description:**  
+- **Type:** (Model / Dataset / Algorithm / Code Library / Other)  
+- **Version/Release:**  
+- **Source/Provider:**  
+- **Original Creator(s):**  
 
-## 2. Intellectual Property (IP) Status
+## 2. Use Case Details
+- **Project Name:**  
+- **Business Unit:**  
+- **Intended Use:** (Training / Fine-tuning / Inference / Integration / Other)  
+- **Commercial Purpose?** Yes / No  
+- **Expected Distribution:** (Internal only / Customer-facing / Open source / Other)  
 
-| Question | Answer | Notes |
-|----------|--------|-------|
-| Does the organization own the training data? | Yes / No |       |
-| Are third-party datasets used? | Yes / No |       |
-| Have rights been obtained to reuse/modify third-party data? | Yes / No |       |
-| Are there limitations on derivative works? | Yes / No |       |
-| Are any open-source AI models or datasets used? | Yes / No |       |
+## 3. License Information
+- **License Type:** (Apache / MIT / GPL / Commercial / Custom / Other)  
+- **License URL/Reference:**  
+- **License Expiration Date (if applicable):**  
+- **Upfront Costs:**  
+- **Ongoing/Usage Costs:**  
 
-## 3. License Terms Evaluation
+## 4. License Terms Evaluation
+| Requirement | Permitted? | Notes/Restrictions |
+|-------------|------------|-------------------|
+| Commercial use | Yes / No / Conditional |  |
+| Modification rights | Yes / No / Conditional |  |
+| Distribution rights | Yes / No / Conditional |  |
+| Sublicensing rights | Yes / No / Conditional |  |
+| Private use | Yes / No / Conditional |  |
+| Patent grant | Yes / No / Conditional |  |
+| Attribution required | Yes / No / Conditional |  |
+| State changes required | Yes / No / Conditional |  |
 
-| Component | License Type | Terms Reviewed | Compatible with Use? | Restrictions |
-|-----------|--------------|----------------|----------------------|--------------|
-| Dataset 1 |              | Yes / No       | Yes / No             |              |
-| Model X   |              | Yes / No       | Yes / No             |              |
-| Tool Y    |              | Yes / No       | Yes / No             |              |
+## 5. Copyleft/Viral Terms Assessment
+- **Contains copyleft/viral licensing terms?** Yes / No  
+- **If Yes, explain implications:**  
 
-## 4. Distribution and Attribution
+## 6. Compliance Requirements
+| Requirement | Action Required | Responsible Party | Completion Date |
+|-------------|-----------------|------------------|-----------------|
+| Attribution notices |  |  |  |
+| License inclusion |  |  |  |
+| Source code provision |  |  |  |
+| Change documentation |  |  |  |
+| Distribution restrictions |  |  |  |
+| Usage metrics reporting |  |  |  |
 
-| Requirement | Included? | Notes |
-|-------------|-----------|-------|
-| Attribution Required | Yes / No | |
-| Logo or branding usage allowed | Yes / No | |
-| Redistribution permitted | Yes / No | |
-| Non-commercial use only | Yes / No | |
+## 7. Third-Party/Embedded Components
+| Component | License Type | Compatible with Primary License? | Action Required |
+|-----------|-------------|----------------------------------|--------------- |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
 
-## 5. Legal Sign-Off
+## 8. IP Rights Verification
+| Aspect | Verified? | Supporting Documentation |
+|--------|-----------|-------------------------|
+| Training data rights secured | Yes / No / Partial |  |
+| Third-party IP cleared | Yes / No / Partial |  |
+| Patent search conducted | Yes / No / Partial |  |
+| Copyright clearance | Yes / No / Partial |  |
 
-- **Legal Reviewer Name:**  
-- **Signature:**  
-- **Date:**  
-- **Approval Status:**  
-  - [ ] Approved  
-  - [ ] Approved with Conditions  
-  - [ ] Rejected  
+## 9. Risk Assessment
+| Risk Factor | Level (Low/Medium/High) | Mitigation Strategy |
+|-------------|-------------------------|---------------------|
+| License compliance risk |  |  |
+| IP infringement risk |  |  |
+| Termination/change risk |  |  |
+| Audit/verification risk |  |  |
 
-## 6. Follow-Up Actions (If Any)
+## 10. Output Ownership Clarification
+- **Who owns outputs from this AI system?**  
+- **Any limitations on output ownership or use?**  
+- **Required attributions for outputs?**  
 
-- _______________________________________________________________  
-- _______________________________________________________________  
-- _______________________________________________________________
+## 11. Legal Review
+- **Reviewed by Legal:** Yes / No  
+- **Legal Reviewer:**  
+- **Date of Review:**  
+- **Legal Concerns:**  
+
+## 12. Approval
+- [ ] Approved for use without conditions
+- [ ] Approved for use with conditions (specified below)
+- [ ] Not approved
+
+**Conditions:**
+
+| Approver | Title | Signature | Date |
+|----------|-------|-----------|------|
+|  |  |  |  |
+|  |  |  |  |

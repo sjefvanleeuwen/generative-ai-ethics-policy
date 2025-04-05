@@ -1,52 +1,85 @@
-# Annex-L: Accessibility Impact Assessment Form
+# Annex-L: Accessibility Assessment Template
 
-## 1. Project Details
+## 1. Assessment Information
 - **AI System Name:**  
-- **Department/Unit:**  
-- **Interface/Platform:**  
-- **Prepared By:**  
-- **Date of Assessment:**  
+- **Version/Model:**  
+- **Business Unit:**  
+- **Assessment Date:**  
+- **Assessor:**  
 
-## 2. Purpose
-Evaluate the accessibility of user-facing AI systems and ensure compliance with WCAG 2.1 AA and relevant local accessibility standards.
+## 2. Accessibility Standards Compliance
+| Standard | Compliant? | Issues Identified | Remediation Plan |
+|----------|------------|------------------|------------------|
+| WCAG 2.1 Level A | Yes / No / Partial |  |  |
+| WCAG 2.1 Level AA | Yes / No / Partial |  |  |
+| EU Accessibility Act | Yes / No / Partial |  |  |
+| Internal Accessibility Policy | Yes / No / Partial |  |  |
 
-## 3. User Interaction Context
-- **Primary User Groups:** (e.g., customers, employees, partners)  
-- **Interface Types:** (e.g., chatbot, mobile app, dashboard)  
-- **Assistive Technology Compatibility:** (e.g., screen readers, voice commands)  
+## 3. Interface Assessment
+| Component | Passes Accessibility Testing? | Issues Identified | Severity (Low/Medium/High) |
+|-----------|------------------------------|-------------------|----------------------------|
+| Visual Interface | Yes / No / Partial |  |  |
+| Text Output | Yes / No / Partial |  |  |
+| Input Methods | Yes / No / Partial |  |  |
+| Navigation | Yes / No / Partial |  |  |
+| Error Messages | Yes / No / Partial |  |  |
+| Interactive Elements | Yes / No / Partial |  |  |
 
-## 4. Accessibility Design Checklist
+## 4. Screen Reader Compatibility
+| Screen Reader | Compatible? | Issues | Notes |
+|---------------|-------------|--------|-------|
+| JAWS |  |  |  |
+| NVDA |  |  |  |
+| VoiceOver |  |  |  |
+| TalkBack |  |  |  |
 
-| Criterion | Met? (Y/N) | Comments |
-|----------|------------|----------|
-| Text alternatives for all non-text content |            |          |
-| Keyboard navigation without mouse |            |          |
-| Sufficient color contrast |            |          |
-| Resizable text and responsive layout |            |          |
-| Avoidance of flashing or animated content |            |          |
-| Labels and instructions for inputs |            |          |
-| Captions and transcripts for media |            |          |
-| Logical focus order and tabbing |            |          |
-| Error suggestions and confirmations |            |          |
-| Accessible feedback/error messages |            |          |
+## 5. Alternate Input Methods
+| Method | Supported? | Issues | Notes |
+|--------|------------|--------|-------|
+| Keyboard Navigation |  |  |  |
+| Voice Control |  |  |  |
+| Switch Access |  |  |  |
+| Eye Tracking |  |  |  |
 
-## 5. Testing Results
+## 6. Color and Contrast
+| Requirement | Meets Standard? | Issues | Notes |
+|-------------|-----------------|--------|-------|
+| Text Contrast Ratio (4.5:1) |  |  |  |
+| UI Elements Contrast (3:1) |  |  |  |
+| Color Independence |  |  |  |
 
-| Test Method | Completed? (Y/N) | Tool/Procedure Used | Issues Found |
-|-------------|------------------|---------------------|--------------|
-| Automated WCAG Check |                  |                     |              |
-| Manual Screen Reader Test |                  |                     |              |
-| Keyboard-Only Navigation Test |                  |                     |              |
-| Mobile Accessibility Audit |                  |                     |              |
+## 7. Inclusive AI Output
+| Aspect | Evaluation | Notes |
+|--------|------------|-------|
+| Reading Level | CEFR Level: |  |
+| Jargon Usage | Low / Medium / High |  |
+| Cultural Inclusivity | Low / Medium / High |  |
+| Language Translation Options | Available / Limited / None |  |
 
-## 6. Remediation Plan
-- **Issues Identified:**  
-- **Mitigation Steps:**  
-- **Estimated Timeline for Fixes:**  
-- **Responsible Team:**  
+## 8. User Testing with People with Disabilities
+| Disability Type | Number of Testers | Key Findings | Improvement Actions |
+|-----------------|-------------------|--------------|---------------------|
+| Visual |  |  |  |
+| Hearing |  |  |  |
+| Motor |  |  |  |
+| Cognitive |  |  |  |
 
-## 7. Sign-Off
+## 9. Overall Assessment
+- [ ] Fully Accessible (All standards met, no barriers identified)
+- [ ] Mostly Accessible (Minor issues that don't prevent usage)
+- [ ] Partially Accessible (Some barriers exist that impact certain users)
+- [ ] Not Accessible (Critical barriers prevent access by people with disabilities)
 
-| Name | Role | Signature | Date |
+## 10. Remediation Plan
+| Issue | Priority | Responsible Party | Target Completion | Cost Estimate |
+|-------|----------|------------------|-------------------|---------------|
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+## 11. Sign-Off
+| Role | Name | Signature | Date |
 |------|------|-----------|------|
-|      |      |           |      |
+| Assessor |  |  |  |
+| Business Owner |  |  |  |
+| Accessibility Officer |  |  |  |

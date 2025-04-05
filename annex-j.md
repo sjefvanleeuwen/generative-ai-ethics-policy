@@ -1,51 +1,92 @@
 # Annex-J: Human Oversight Checklist
 
-## 1. General Information
+## 1. System Information
 - **AI System Name:**  
+- **Version/Release:**  
 - **Business Unit:**  
-- **Prepared By:**  
-- **Date of Completion:**  
+- **Risk Classification:** Low / Medium / High
+- **Deployment Environment:** Development / Testing / Production
+- **System Purpose:**  
 
-## 2. Decision Oversight Requirements
+## 2. Oversight Requirements Assessment
 
-| Question | Yes/No | Notes |
-|----------|--------|-------|
-| Is this system classified as medium or high risk under the EU AI Act? |        |       |
-| Does the AI system make decisions that significantly affect individuals? |        |       |
-| Are there documented thresholds for requiring human review? |        |       |
-| Are human reviewers trained to interpret AI outputs? |        |       |
-| Can AI-generated decisions be overridden? |        |       |
-| Is the override process documented and auditable? |        |       |
-| Is a human-in-the-loop workflow implemented? |        |       |
-| Are override decisions logged with rationale? |        |       |
-| Are there escalation procedures for contested decisions? |        |       |
+| Requirement | Implemented? | Implementation Details | Gap Analysis |
+|-------------|--------------|------------------------|-------------|
+| **Human Review Points** |  |  |  |
+| Identified critical decision points requiring human review |  |  |  |
+| Review thresholds defined based on confidence scores |  |  |  |
+| Sampling strategy defined for non-critical decisions |  |  |  |
+| **Reviewer Qualifications** |  |  |  |
+| Required expertise and training documented |  |  |  |
+| Backup reviewers identified |  |  |  |
+| Independence from development team |  |  |  |
+| **Review Interface** |  |  |  |
+| Dedicated review UI/dashboard |  |  |  |
+| Explanation features available to reviewers |  |  |  |
+| Relevant context and data accessible |  |  |  |
+| **Override Mechanisms** |  |  |  |
+| Process for human override of AI decisions |  |  |  |
+| Authorization levels for different override scenarios |  |  |  |
+| Audit trail for all overrides |  |  |  |
+| **Escalation Path** |  |  |  |
+| Clear escalation process for uncertain cases |  |  |  |
+| SLAs for escalation responses |  |  |  |
+| Communication channels established |  |  |  |
 
-## 3. Oversight Implementation Design
+## 3. Oversight Workload Assessment
+- **Estimated volume requiring human review:** _____ per day/week/month
+- **Average time per review:** _____ minutes
+- **Total FTE required:** _____
+- **Current FTE available:** _____
+- **Staffing gap analysis:**  
 
-- **Describe how human oversight is embedded in the system's workflow:**  
-- **List system components that require human interaction:**  
-- **Describe the user interface used for review and override:**  
+## 4. Reviewer Training Program
+- **Training curriculum developed:** Yes / No / Partial
+- **Training frequency:** Initial + Quarterly / Semi-annual / Annual
+- **Competency assessment method:**  
+- **Retraining triggers:**  
 
-## 4. Oversight Roles & Responsibilities
+## 5. Performance Monitoring
+| Metric | Target | Measurement Method | Reporting Frequency |
+|--------|--------|-------------------|---------------------|
+| False positive rate |  |  |  |
+| False negative rate |  |  |  |
+| Override rate |  |  |  |
+| Average review time |  |  |  |
+| Escalation frequency |  |  |  |
+| Inter-reviewer consistency |  |  |  |
 
-| Role | Individual/Team | Responsibility |
-|------|-----------------|----------------|
-| Oversight Reviewer |                 | Perform regular decision reviews |
-| Technical Lead |                 | Ensure technical feasibility of overrides |
-| Ethics Liaison |                 | Report concerns to AI Ethics Board |
+## 6. Continuous Improvement Plan
+- **Feedback loop methodology:**  
+- **Model retraining schedule:**  
+- **Review process optimization:**  
 
-## 5. Logging & Audit
+## 7. Documentation & Compliance
+- **Review records retention policy:**  
+- **Documentation location:**  
+- **Applicable regulations:**  
 
-| Logging Element | Implemented? | Notes |
-|-----------------|--------------|-------|
-| Decision input/output | Yes / No |       |
-| Human reviewer ID | Yes / No |       |
-| Override rationale | Yes / No |       |
-| Time of intervention | Yes / No |       |
-| Escalation log | Yes / No |       |
+## 8. Assessment Outcome
+- [ ] Full oversight implemented
+- [ ] Partial oversight implemented (remediation plan required)
+- [ ] Oversight inadequate (system deployment not recommended)
 
-## 6. Sign-Off
+**Remediation Plan:**
 
-| Name | Role | Signature | Date |
+| Gap | Action Required | Owner | Timeline | Status |
+|-----|----------------|-------|----------|--------|
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+## 9. Approvals
+
+| Role | Name | Signature | Date |
 |------|------|-----------|------|
-|      |      |           |      |
+| AI System Owner |  |  |  |
+| Oversight Manager |  |  |  |
+| AI Ethics Board Rep |  |  |  |
+| DPO (if applicable) |  |  |  |
+
+**Review Date:** ____/____/20__  
+**Next Review Due:** ____/____/20__

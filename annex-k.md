@@ -1,58 +1,118 @@
 # Annex-K: AI Threat Modeling Template
 
-## 1. AI System Metadata
-- **System Name:**  
-- **Owner Department:**  
-- **Model Type (e.g., LLM, ML classifier):**  
+## 1. System Overview
+- **AI System Name:**  
 - **Version:**  
-- **Date of Assessment:**  
-- **Assessed By:**  
+- **Business Purpose:**  
+- **Risk Classification:** Low / Medium / High
+- **Data Types Processed:**  
+- **Deployment Environment:**  
+- **Integration Points:**  
 
-## 2. Purpose of Threat Modeling
-Describe the scope, objectives, and context of the threat modeling process for this AI system.
+## 2. System Architecture
+- **Model Type/Framework:**  
+- **API Dependencies:**  
+- **Data Storage:**  
+- **Authentication Mechanisms:**  
 
-## 3. System Architecture Overview
-Provide a diagram or summary of the components involved:
-- Data sources
-- Preprocessing pipelines
-- Model training and inference
-- Interfaces and outputs
-- Users and roles
-- Third-party dependencies
+_Include architecture diagram here_
 
-## 4. Asset Inventory
-| Asset | Description | Criticality (High/Med/Low) | Owner |
-|-------|-------------|----------------------------|-------|
-|       |             |                            |       |
+## 3. Trust Boundaries
+| Boundary | Description | Protection Mechanism | Assessed Strength |
+|----------|-------------|---------------------|-------------------|
+| External-Internal |  |  | Low/Medium/High |
+| Model-Infrastructure |  |  | Low/Medium/High |
+| Data Processing Zones |  |  | Low/Medium/High |
+| User-System |  |  | Low/Medium/High |
+| Third-Party Components |  |  | Low/Medium/High |
 
-## 5. Threat Identification (STRIDE)
+## 4. Threat Categories & Risk Assessment
 
-| Threat Type | Description | Applicable? (Y/N) | Notes |
-|-------------|-------------|-------------------|-------|
-| Spoofing    | Impersonation of user/system    |                   |       |
-| Tampering   | Unauthorized modification        |                   |       |
-| Repudiation | Denial of action or responsibility |                 |       |
-| Information Disclosure | Data leakage or unauthorized access |         |       |
-| Denial of Service | System disruption           |                   |       |
-| Elevation of Privilege | Gaining unauthorized rights |               |       |
+### 4.1 Model Security Threats
 
-## 6. AI-Specific Threats
+| Threat | Likelihood | Impact | Risk Rating | Controls |
+|--------|------------|--------|-------------|----------|
+| **Prompt injection** |  |  |  |  |
+| **Model extraction** |  |  |  |  |
+| **Training data poisoning** |  |  |  |  |
+| **Adversarial examples** |  |  |  |  |
+| **Model inversion attacks** |  |  |  |  |
+| **Membership inference** |  |  |  |  |
 
-| Threat Category | Description | Likelihood (1–5) | Impact (1–5) | Mitigation Strategy |
-|-----------------|-------------|------------------|--------------|----------------------|
-| Model Poisoning | Inserting corrupted training data |                  |              |                      |
-| Adversarial Inputs | Malicious input to force misclassification |           |              |                      |
-| Data Drift | Gradual change in input data characteristics |          |              |                      |
-| Prompt Injection | Prompt manipulation in LLMs |                   |              |                      |
+### 4.2 Infrastructure Threats
 
-## 7. Controls & Residual Risk
+| Threat | Likelihood | Impact | Risk Rating | Controls |
+|--------|------------|--------|-------------|----------|
+| **API abuse** |  |  |  |  |
+| **DDoS attacks** |  |  |  |  |
+| **Supply chain attacks** |  |  |  |  |
+| **Data exfiltration** |  |  |  |  |
+| **Authentication bypass** |  |  |  |  |
 
-| Control Implemented | Description | Effectiveness (High/Med/Low) |
-|---------------------|-------------|------------------------------|
-|                     |             |                              |
+### 4.3 Data Security Threats
 
-## 8. Reviewer Sign-Off
+| Threat | Likelihood | Impact | Risk Rating | Controls |
+|--------|------------|--------|-------------|----------|
+| **Training data leakage** |  |  |  |  |
+| **Sensitive info in outputs** |  |  |  |  |
+| **Data poisoning** |  |  |  |  |
+| **Unauthorized access** |  |  |  |  |
 
-| Name | Role | Signature | Date |
+### 4.4 Operational Threats
+
+| Threat | Likelihood | Impact | Risk Rating | Controls |
+|--------|------------|--------|-------------|----------|
+| **Availability disruption** |  |  |  |  |
+| **Performance degradation** |  |  |  |  |
+| **Dependency failures** |  |  |  |  |
+
+## 5. Attack Vectors & Scenarios
+| ID | Attack Vector | Attack Scenario | Impact | Mitigation |
+|----|--------------|-----------------|--------|------------|
+| AV-1 |  |  |  |  |
+| AV-2 |  |  |  |  |
+| AV-3 |  |  |  |  |
+
+## 6. Security Controls Matrix
+| Control Category | Control | Implementation Status | Testing Method | Testing Frequency |
+|------------------|---------|----------------------|---------------|-------------------|
+| **Input Validation** |  |  |  |  |
+| **Authentication** |  |  |  |  |
+| **Authorization** |  |  |  |  |
+| **Data Protection** |  |  |  |  |
+| **Monitoring & Detection** |  |  |  |  |
+| **Response & Recovery** |  |  |  |  |
+
+## 7. Vulnerability Testing Plan
+| Test Type | Scope | Methodology | Schedule | Responsible Team |
+|-----------|-------|-------------|----------|------------------|
+| Prompt injection testing |  |  |  |  |
+| Fuzzing |  |  |  |  |
+| Adversarial testing |  |  |  |  |
+| Penetration testing |  |  |  |  |
+| Supply chain review |  |  |  |  |
+
+## 8. Risk Mitigation Plan
+| Risk | Mitigation Action | Owner | Timeline | Success Criteria | Status |
+|------|-------------------|-------|----------|------------------|--------|
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+## 9. Security Monitoring Requirements
+- **Logging Requirements:**  
+- **Alert Thresholds:**  
+- **Incident Response Integration:**  
+
+## 10. Approvals & Reviews
+
+| Role | Name | Signature | Date |
 |------|------|-----------|------|
-|      |      |           |      |
+| AI Security Architect |  |  |  |
+| IT Security Officer |  |  |  |
+| DPO |  |  |  |
+| AI Ethics Board Rep |  |  |  |
+
+**Threat Model Version:** ______  
+**Review Date:** ____/____/20__  
+**Next Review Due:** ____/____/20__

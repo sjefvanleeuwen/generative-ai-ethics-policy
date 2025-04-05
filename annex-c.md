@@ -53,3 +53,19 @@
 **Reviewer Name:** ______________________  
 **Review Date:** ____/____/20__  
 **Signature:** ______________________
+
+## Vendor Assessment Process Diagram
+
+<div class="bpmn-viewer-container" id="bpmn-viewer-vendor-assessment-process-bpmn-container">
+  <div class="bpmn-toolbar">
+    <span>AI Vendor Assessment Process</span>
+    <div>
+      <button class="zoom-in" data-viewer="bpmn-viewer-vendor-assessment-process-bpmn">Zoom In</button>
+      <button class="zoom-out" data-viewer="bpmn-viewer-vendor-assessment-process-bpmn">Zoom Out</button>
+      <button class="reset-view" data-viewer="bpmn-viewer-vendor-assessment-process-bpmn">Reset View</button>
+    </div>
+  </div>
+  <div class="bpmn-canvas" id="bpmn-viewer-vendor-assessment-process-bpmn" data-bpmn-file="vendor-assessment-process.bpmn"></div>
+</div>
+
+[View/download BPMN XML](bpmn/vendor-assessment-process.bpmn)
