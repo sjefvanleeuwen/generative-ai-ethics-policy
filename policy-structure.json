@@ -1,0 +1,166 @@
+[
+  {
+    "id": "00-Table-of-Contents",
+    "title": "Table of Contents"
+  },
+  {
+    "id": "01-Executive-Summary",
+    "title": "Executive Summary"
+  },
+  {
+    "id": "02-Purpose-and-Scope",
+    "title": "Purpose & Scope"
+  },
+  {
+    "id": "03-Definitions-and-Glossary",
+    "title": "Definitions & Glossary"
+  },
+  {
+    "id": "04-Regulatory-Compliance",
+    "title": "Regulatory Compliance"
+  },
+  {
+    "id": "05-Governance-and-Accountability",
+    "title": "Governance & Accountability"
+  },
+  {
+    "id": "06-Risk-Management",
+    "title": "Risk Management"
+  },
+  {
+    "id": "07-Transparency-and-Explainability",
+    "title": "Transparency & Explainability"
+  },
+  {
+    "id": "08-Human-Oversight",
+    "title": "Human Oversight"
+  },
+  {
+    "id": "09-Employee-Rights-and-Consent",
+    "title": "Employee Rights & Consent"
+  },
+  {
+    "id": "10-Data-Governance",
+    "title": "Data Governance"
+  },
+  {
+    "id": "11-Cybersecurity",
+    "title": "Cybersecurity"
+  },
+  {
+    "id": "12-Accessibility-and-Inclusion",
+    "title": "Accessibility & Inclusion"
+  },
+  {
+    "id": "13-Intellectual-Property-and-Licensing",
+    "title": "Intellectual Property & Licensing"
+  },
+  {
+    "id": "14-Social-Impact-and-Stakeholder-Engagement",
+    "title": "Social Impact & Stakeholder Engagement"
+  },
+  {
+    "id": "15-Training-and-Awareness",
+    "title": "Training & Awareness"
+  },
+  {
+    "id": "16-Monitoring-and-Audit",
+    "title": "Monitoring & Audit"
+  },
+  {
+    "id": "17-Enforcement-and-Sanctions",
+    "title": "Enforcement & Sanctions"
+  },
+  {
+    "id": "18-Review-and-Change-Management",
+    "title": "Review & Change Management"
+  },
+  {
+    "id": "19-Implementation-Roadmap",
+    "title": "Implementation Roadmap"
+  },
+  {
+    "id": "20-Approval-and-Signatures",
+    "title": "Approval & Signatures"
+  },
+  {
+    "id": "annex-a",
+    "title": "Annex-A: DPIA Template (Data Protection Impact Assessment)"
+  },
+  {
+    "id": "annex-b",
+    "title": "Annex-B: AI Incident Response Playbook"
+  },
+  {
+    "id": "annex-c",
+    "title": "Annex-C: Vendor AI Due Diligence Checklist"
+  },
+  {
+    "id": "annex-d",
+    "title": "Annex-D: AI Ethics Implementation Plan & RACI Matrix"
+  },
+  {
+    "id": "annex-e",
+    "title": "Annex-E: Policy Exception Request Form"
+  },
+  {
+    "id": "annex-f",
+    "title": "Annex-F: Risk Register Template"
+  },
+  {
+    "id": "annex-g",
+    "title": "Annex-G: Risk Scoring Matrix"
+  },
+  {
+    "id": "annex-h",
+    "title": "Annex-H: Explainability Report Template"
+  },
+  {
+    "id": "annex-i",
+    "title": "Annex-I: User Disclosure Template"
+  },
+  {
+    "id": "annex-j",
+    "title": "Annex-J: Human Oversight Checklist"
+  },
+  {
+    "id": "annex-k",
+    "title": "Annex-K: AI Threat Modeling Template"
+  },
+  {
+    "id": "annex-l",
+    "title": "Annex-L: Accessibility Assessment Template"
+  },
+  {
+    "id": "annex-m",
+    "title": "Annex-M: IP & License Clearance Form"
+  },
+  {
+    "id": "annex-n",
+    "title": "Annex-N: Stakeholder Registry Template"
+  },
+  {
+    "id": "annex-o",
+    "title": "Annex-O: Policy Change Request Form"
+  },
+  {
+    "id": "at-a-glance",
+    "title": "Generative AI Ethics Policy At a Glance"
+  },
+  {
+    "id": "index",
+    "title": "Generative AI Ethics Policy"
+  },
+  {
+    "id": "poster",
+    "title": "🧠 AI Use Policy – What You Need to Know (At a Glance)"
+  },
+  {
+    "id": "process-diagrams",
+    "title": "Process Diagrams"
+  },
+  {
+    "id": "rollout",
+    "title": "AI Ethics Policy Rollout Support Plan"
+  }
+]
