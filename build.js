@@ -485,6 +485,12 @@ const headersContent = `
 
 /*.js
   Content-Type: application/javascript
+
+# Security headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
 `;
 
 fs.writeFileSync(path.join(distDir, '_headers'), headersContent);
