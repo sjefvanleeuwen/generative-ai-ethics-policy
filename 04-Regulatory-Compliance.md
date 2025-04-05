@@ -20,8 +20,8 @@ Applies to all generative AI systems developed, deployed, or used by the organiz
 
 **Procedures**
 
-1.  Complete DPIA template for all generative AI systems (see Annex A).
-2.  Register all AI systems in the AI Systems Inventory (see Annex B).
+1.  Complete DPIA template for all generative AI systems (see [Annex A: DPIA Template](annex-a.md)).
+2.  Register all AI systems in the AI Systems Inventory and prepare incident response plans (see [Annex B: AI Incident Response](annex-b.md)).
 3.  Document compliance measures in the Regulatory Compliance Register.
 4.  Review compliance quarterly and before significant system changes.
 

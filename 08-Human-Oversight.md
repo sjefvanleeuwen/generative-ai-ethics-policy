@@ -20,7 +20,7 @@ All generative AI systems regardless of autonomy level, with particular focus on
 
 **Procedures**
 
-1.  Complete Human Oversight Checklist (Annex J) for each AI system.
+1.  Complete Human Oversight Checklist ([Annex J: Human Oversight Checklist](annex-j.md)) for each AI system.
 2.  Design clear escalation paths for reviewers encountering edge cases.
 3.  Document all human overrides of AI decisions with rationale.
 4.  Review override patterns quarterly to identify potential AI improvements.

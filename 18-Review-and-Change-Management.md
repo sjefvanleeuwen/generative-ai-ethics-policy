@@ -20,7 +20,7 @@ Entire policy and annexes.
 **Procedures**
 
 1.  Solicit stakeholder feedback bi-annually.
-2.  Document change requests via Change Request Form (Annex O).
+2.  Document change requests via Change Request Form ([Annex O: Policy Change Request](annex-o.md)).
 3.  Review and approve changes at AI Ethics Board meeting.
 4.  Publish updated policy and notify stakeholders.
 

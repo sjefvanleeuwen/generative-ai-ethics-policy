@@ -21,7 +21,7 @@ Covers communication and consultation with employees, customers, regulators, com
 
 **Procedures**
 
-1.  Maintain Stakeholder Registry (Annex N).
+1.  Maintain Stakeholder Registry ([Annex N: Stakeholder Registry](annex-n.md)).
 2.  Host biannual AI Ethics Forum with cross-functional participants.
 3.  Conduct quarterly stakeholder surveys; document findings in Stakeholder Feedback Report.
 4.  Respond to regulatory inquiries within 10 business days.

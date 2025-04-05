@@ -23,7 +23,7 @@ Applies to all generative AI systems, infrastructure, data repositories, and mod
 
 **Procedures**
 
-1.  **Secure Development:** Integrate security reviews into AI development lifecycle using the Secure AI Development Checklist (Annex K).
+1.  **Secure Development:** Integrate security reviews into AI development lifecycle using the Secure AI Development Checklist ([Annex K: AI Threat Modeling](annex-k.md)).
 2.  **Vulnerability Management:** Scan AI infrastructure and dependencies monthly for CVEs and other vulnerabilities.
 3.  **Adversarial Testing:** Conduct formal adversarial testing including prompt injection, model extraction, and evasion attacks.
 4.  **Key Management:** Apply robust key management for all cryptographic operations, with regular key rotation.

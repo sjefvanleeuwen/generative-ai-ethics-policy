@@ -20,7 +20,7 @@ Applies to all user-facing AI applications and internal tools used by employees 
 
 **Procedures**
 
-1.  **Accessibility Impact Assessment:** Use Annex L template to evaluate compliance during design and development phases.
+1.  **Accessibility Impact Assessment:** Use [Annex L: Accessibility Assessment](annex-l.md) template to evaluate compliance during design and development phases.
 2.  **Automated & Manual Testing:** Perform automated scans and manual testing (screen readers, keyboard navigation) before release.
 3.  **Issue Tracking & Remediation:** Log accessibility defects in central issue tracker; remediate within SLA of 30 days.
 4.  **User Feedback Loop:** Monitor feedback channels and integrate findings into iterative improvements.

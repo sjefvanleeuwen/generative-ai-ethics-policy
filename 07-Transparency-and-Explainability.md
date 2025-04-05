@@ -22,8 +22,8 @@ Applies to every generative AI system classified as medium or high risk under th
 **Procedures**
 
 1.  **Model Registry Maintenance:** Update the Model Documentation repository whenever a new model is onboarded or an existing model is retrained.
-2.  **Explainability Report Generation:** Use standardized templates (Annex H) to produce reports for each high-risk use case. Share reports with AI Ethics Board and affected business units.
-3.  **User-Facing Transparency:** Embed disclosures in user interfaces and customer communications, following standardized wording guidelines (Annex I).
+2.  **Explainability Report Generation:** Use standardized templates ([Annex H: Explainability Report](annex-h.md)) to produce reports for each high-risk use case. Share reports with AI Ethics Board and affected business units.
+3.  **User-Facing Transparency:** Embed disclosures in user interfaces and customer communications, following standardized wording guidelines ([Annex I: User Disclosure Template](annex-i.md)).
 4.  **Decision Logging & Audit Trail:** Implement automated logging of inputs, outputs, and overrides. Store logs securely with access controls.
 5.  **Stakeholder Communication:** Schedule and execute quarterly briefings, documenting minutes and action items in the Compliance Register.
 

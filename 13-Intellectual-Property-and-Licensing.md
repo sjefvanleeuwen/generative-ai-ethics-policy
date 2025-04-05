@@ -20,7 +20,7 @@ Covers all proprietary, open-source, and third-party data, models, libraries, an
 
 **Procedures**
 
-1.  **IP Due Diligence:** Conduct IP clearance using Annex M checklist before onboarding any dataset or model.
+1.  **IP Due Diligence:** Conduct IP clearance using [Annex M: IP & License Clearance](annex-m.md) checklist before onboarding any dataset or model.
 2.  **License Review:** Assess license terms for compatibility with company use cases; document restrictions in License Registry.
 3.  **Output Attribution:** Apply standard attribution templates for all AI-generated content distributed externally.
 4.  **Compliance Audits:** Perform annual license compliance audits; remediate non-compliance within 60 days.

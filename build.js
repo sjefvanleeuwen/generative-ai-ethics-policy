@@ -151,6 +151,25 @@ function build() {
     copyFiles(filesToCopy);
     copyDirectories(directoriesToCopy);
     
+    // Make sure we copy all annex files specifically
+    const annexFiles = fs.readdirSync(sourceDir)
+        .filter(file => file.startsWith('annex-') && file.endsWith('.md'));
+    
+    // Copy each annex file
+    annexFiles.forEach(file => {
+        const sourcePath = path.join(sourceDir, file);
+        const destPath = path.join(distDir, file);
+        fs.copyFileSync(sourcePath, destPath);
+        console.log(`  Copied annex: ${file}`);
+    });
+    
+    // Ensure rollout.md is copied
+    const rolloutPath = path.join(sourceDir, 'rollout.md');
+    if (fs.existsSync(rolloutPath)) {
+        fs.copyFileSync(rolloutPath, path.join(distDir, 'rollout.md'));
+        console.log('  Copied: rollout.md');
+    }
+    
     console.log('Build complete! Files and directories copied to dist folder.');
 }
 

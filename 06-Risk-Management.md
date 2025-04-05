@@ -20,8 +20,8 @@ All potential risks across the entire AI system lifecycle, including technical, 
 
 **Procedures**
 
-1.  Complete AI Risk Assessment Form (Annex F).
-2.  Quantify risks using the Risk Scoring Matrix (Annex G).
+1.  Complete AI Risk Assessment Form ([Annex F](annex-f.md)).
+2.  Quantify risks using the Risk Scoring Matrix ([Annex G](annex-g.md)).
 3.  Add to Risk Register with proposed mitigations.
 4.  Implement and verify mitigations before production.
 

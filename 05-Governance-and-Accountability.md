@@ -20,10 +20,10 @@ All generative AI systems, from conception through to decommissioning.
 
 **Procedures**
 
-1.  Complete AI Project Initiation Form (Annex C) for all new generative AI initiatives.
+1.  Complete AI Project Initiation Form ([Annex C: Vendor AI Due Diligence](annex-c.md)) for all new generative AI initiatives.
 2.  Conduct mandatory review by Technical Review Committee for training, deployment, and update cycles.
 3.  Present high-risk use cases to AI Ethics Board for approval before development.
-4.  Maintain Decision Log (Annex D) for key decisions.
+4.  Maintain Decision Log ([Annex D: Implementation Plan & RACI](annex-d.md)) for key decisions.
 
 **Controls & Metrics**
 

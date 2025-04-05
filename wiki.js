@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Policy document structure
     const policyStructure = [
-        { id: 'at-a-glance', title: 'At a Glance Overview' },
+        { id: 'poster', title: 'Policy At a Glance (Poster)' },
         { id: '00-Table-of-Contents', title: 'Table of Contents' },
         { id: '01-Executive-Summary', title: 'Executive Summary' },
         { id: '02-Purpose-and-Scope', title: 'Purpose & Scope' },
@@ -81,7 +81,24 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: '18-Review-and-Change-Management', title: 'Review & Change Management' },
         { id: '19-Implementation-Roadmap', title: 'Implementation Roadmap' },
         { id: '20-Approval-and-Signatures', title: 'Approval & Signatures' },
-        { id: 'process-diagrams', title: 'Process Diagrams' }
+        { id: 'process-diagrams', title: 'Process Diagrams' },
+        { id: 'rollout', title: 'Rollout Plan' },
+        // Add annexes
+        { id: 'annex-a', title: 'Annex A: DPIA Template' },
+        { id: 'annex-b', title: 'Annex B: AI Incident Response' },
+        { id: 'annex-c', title: 'Annex C: Vendor AI Due Diligence' },
+        { id: 'annex-d', title: 'Annex D: Implementation Plan & RACI' },
+        { id: 'annex-e', title: 'Annex E: Policy Exception Request' },
+        { id: 'annex-f', title: 'Annex F: Risk Register Template' },
+        { id: 'annex-g', title: 'Annex G: Risk Scoring Matrix' },
+        { id: 'annex-h', title: 'Annex H: Explainability Report' },
+        { id: 'annex-i', title: 'Annex I: User Disclosure Template' },
+        { id: 'annex-j', title: 'Annex J: Human Oversight Checklist' },
+        { id: 'annex-k', title: 'Annex K: AI Threat Modeling' },
+        { id: 'annex-l', title: 'Annex L: Accessibility Assessment' },
+        { id: 'annex-m', title: 'Annex M: IP & License Clearance' },
+        { id: 'annex-n', title: 'Annex N: Stakeholder Registry' },
+        { id: 'annex-o', title: 'Annex O: Policy Change Request' }
     ];
 
     // BPMN process diagrams
@@ -163,10 +180,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Special handling for process diagrams page
         if (docId === 'process-diagrams') {
-            // First load the BPMN viewer library
+            // Load the process diagrams page without adding a duplicate title
             loadBpmnViewerLibrary()
                 .then(() => {
-                    // Then load the process diagrams page
+                    // Then load process diagrams
                     return fetch(`${docId}.md`);
                 })
                 .then(response => {
@@ -176,11 +193,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     return response.text();
                 })
                 .then(markdown => {
+                    // Remove HTML comments (for filepath comments)
+                    markdown = markdown.replace(/<!--.*?-->/gs, '');
+                    
                     // Convert markdown to HTML
                     let html = marked.parse(markdown);
-                    
-                    // Add document title
-                    html = `<h1 class="document-title">Process Diagrams</h1>` + html;
                     
                     // Add navigation links
                     const currentIndex = policyStructure.findIndex(item => item.id === docId);
@@ -247,30 +264,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 markdown = markdown.replace(/<!--.*?-->/gs, '');
                 
                 // Check for H1 title at start of document (after HTML comments removal)
-                // This regex captures any # Title at the beginning, allowing for whitespace
                 const h1Match = markdown.match(/^\s*#\s+(.+?)(?:\n|$)/);
                 
-                let html;
-                if (h1Match) {
-                    // If there's an H1 title in the markdown, use it and remove from content
-                    console.log(`Using existing H1 title: "${h1Match[1]}" for ${docId}`);
-                    markdown = markdown.replace(/^\s*#\s+(.+?)(?:\n|$)/, ''); // Remove the H1
-                    
-                    // Convert markdown to HTML
-                    html = marked.parse(markdown);
-                    
-                    // Add the title as an H1 tag with document-title class
-                    html = `<h1 class="document-title">${h1Match[1]}</h1>` + html;
-                } else {
-                    // No H1 found, use the docTitle from policyStructure
-                    console.log(`No H1 found, using title from structure: "${docTitle}" for ${docId}`);
-                    
-                    // Convert markdown to HTML
-                    html = marked.parse(markdown);
-                    
-                    // Add document title from structure
-                    html = `<h1 class="document-title">${docTitle}</h1>` + html;
-                }
+                // Convert markdown to HTML without adding a duplicate title
+                const html = marked.parse(markdown);
                 
                 // Add navigation links
                 const currentIndex = policyStructure.findIndex(item => item.id === docId);
@@ -697,7 +694,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check URL parameters for specific document to load
         const urlParams = new URLSearchParams(window.location.search);
-        const docId = urlParams.get('doc') || '00-Table-of-Contents';
+        const docId = urlParams.get('doc') || 'poster'; // Default to poster page
         
         // Load the document and update active state
         loadDocument(docId);
